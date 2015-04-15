@@ -1,0 +1,450 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ConsultationsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AdminMessages">
+    <Key>
+      <PropertyRef Name="adminMessageId" />
+    </Key>
+    <Property Name="adminMessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="parentMessageId" Type="int" Nullable="false" />
+    <Property Name="fromUserId" Type="int" Nullable="false" />
+    <Property Name="toUserId" Type="int" Nullable="false" />
+    <Property Name="subject" Type="nvarchar" MaxLength="500" />
+    <Property Name="message" Type="nvarchar(max)" />
+    <Property Name="dateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Consultants">
+    <Key>
+      <PropertyRef Name="ConsultantId" />
+    </Key>
+    <Property Name="ConsultantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProfessionId" Type="int" Nullable="false" />
+    <Property Name="SpecialtyId" Type="int" />
+    <Property Name="specialization" Type="nvarchar" MaxLength="512" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="education" Type="nvarchar" MaxLength="1024" />
+    <Property Name="workplace" Type="nvarchar" MaxLength="2048" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="short_resume" Type="nvarchar" MaxLength="2000" />
+    <Property Name="comission_percent" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="photo_url" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="Consultation_Statuses">
+    <Key>
+      <PropertyRef Name="ConsultationStatusId" />
+    </Key>
+    <Property Name="ConsultationStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="status_title" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Consultation_Time">
+    <Key>
+      <PropertyRef Name="consultationTimeId" />
+    </Key>
+    <Property Name="consultationTimeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConsultationId" Type="int" />
+    <Property Name="startTime" Type="datetime" />
+    <Property Name="endTime" Type="datetime" />
+    <Property Name="skypeContact" Type="nvarchar" MaxLength="512" />
+    <Property Name="phoneContact" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="Consultation_Types">
+    <Key>
+      <PropertyRef Name="ConsultationTypeId" />
+    </Key>
+    <Property Name="ConsultationTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="consultation_type" Type="nvarchar" MaxLength="512" Nullable="false" />
+    <Property Name="active" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Consultations">
+    <Key>
+      <PropertyRef Name="ConsultationId" />
+    </Key>
+    <Property Name="ConsultationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="ConsultantId" Type="int" />
+    <Property Name="subject" Type="nvarchar(max)" />
+    <Property Name="consultation_type" Type="int" Nullable="false" />
+    <Property Name="ProfessionId" Type="int" Nullable="false" />
+    <Property Name="SpecialtyId" Type="int" />
+    <Property Name="consultation_status" Type="int" Nullable="false" />
+    <Property Name="create_date" Type="datetime" Nullable="false" />
+    <Property Name="update_date" Type="datetime" Nullable="false" />
+    <Property Name="customer_rating" Type="decimal" Precision="18" Scale="1" />
+    <Property Name="customer_comments" Type="nvarchar" MaxLength="4000" />
+    <Property Name="consultation_price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Countries">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="country_code" Type="nvarchar" MaxLength="50" />
+    <Property Name="country_name" Type="nvarchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Menu">
+    <Key>
+      <PropertyRef Name="MenuId" />
+    </Key>
+    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="512" />
+    <Property Name="url" Type="nvarchar" MaxLength="1024" />
+    <Property Name="roles" Type="nvarchar" MaxLength="50" />
+    <Property Name="parent_id" Type="int" />
+    <Property Name="sort_order" Type="int" />
+  </EntityType>
+  <EntityType Name="Messages">
+    <Key>
+      <PropertyRef Name="MessageId" />
+    </Key>
+    <Property Name="MessageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ConsultationId" Type="int" />
+    <Property Name="message" Type="nvarchar(max)" />
+    <Property Name="added_date" Type="smalldatetime" />
+    <Property Name="attachment" Type="nvarchar" MaxLength="1024" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="published" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Professions">
+    <Key>
+      <PropertyRef Name="ProfessionId" />
+    </Key>
+    <Property Name="ProfessionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Profession_Title" Type="nvarchar" MaxLength="512" />
+    <Property Name="Active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="role_title" Type="nvarchar" MaxLength="512" />
+  </EntityType>
+  <EntityType Name="Specialties">
+    <Key>
+      <PropertyRef Name="SpecialtyId" />
+    </Key>
+    <Property Name="SpecialtyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Specialty_title" Type="nvarchar" MaxLength="512" />
+    <Property Name="ProfessionId" Type="int" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="TransactionId" />
+    </Key>
+    <Property Name="TransactionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="amount" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="transactionDate" Type="datetime" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="4000" />
+    <Property Name="ConsultationId" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nickname" Type="nvarchar" MaxLength="50" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="lastname" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="middlename" Type="nvarchar" MaxLength="128" />
+    <Property Name="street_address" Type="nvarchar" MaxLength="1024" />
+    <Property Name="city" Type="nvarchar" MaxLength="512" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="zip" Type="nvarchar" MaxLength="50" />
+    <Property Name="state" Type="nvarchar" MaxLength="256" />
+    <Property Name="phone" Type="nvarchar" MaxLength="50" />
+    <Property Name="wants_newsletter" Type="smallint" Nullable="false" />
+    <Property Name="alternate_contacts" Type="nvarchar" MaxLength="1024" />
+    <Property Name="comments" Type="nvarchar" MaxLength="1024" />
+    <Property Name="can_publish_questions" Type="smallint" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_AdminMessages_AdminMessages">
+    <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="1" />
+    <End Role="AdminMessages1" Type="Self.AdminMessages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdminMessages">
+        <PropertyRef Name="adminMessageId" />
+      </Principal>
+      <Dependent Role="AdminMessages1">
+        <PropertyRef Name="parentMessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultants_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Consultants" Type="Self.Consultants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Consultants">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultation_Time_Consultations">
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="0..1" />
+    <End Role="Consultation_Time" Type="Self.Consultation_Time" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultations">
+        <PropertyRef Name="ConsultationId" />
+      </Principal>
+      <Dependent Role="Consultation_Time">
+        <PropertyRef Name="ConsultationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultations_Consultants">
+    <End Role="Consultants" Type="Self.Consultants" Multiplicity="0..1" />
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultants">
+        <PropertyRef Name="ConsultantId" />
+      </Principal>
+      <Dependent Role="Consultations">
+        <PropertyRef Name="ConsultantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultations_Consultation_Statuses">
+    <End Role="Consultation_Statuses" Type="Self.Consultation_Statuses" Multiplicity="1" />
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultation_Statuses">
+        <PropertyRef Name="ConsultationStatusId" />
+      </Principal>
+      <Dependent Role="Consultations">
+        <PropertyRef Name="consultation_status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultations_Consultation_Types">
+    <End Role="Consultation_Types" Type="Self.Consultation_Types" Multiplicity="1" />
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultation_Types">
+        <PropertyRef Name="ConsultationTypeId" />
+      </Principal>
+      <Dependent Role="Consultations">
+        <PropertyRef Name="consultation_type" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultations_Professions">
+    <End Role="Professions" Type="Self.Professions" Multiplicity="1" />
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professions">
+        <PropertyRef Name="ProfessionId" />
+      </Principal>
+      <Dependent Role="Consultations">
+        <PropertyRef Name="ProfessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultations_Specialties">
+    <End Role="Specialties" Type="Self.Specialties" Multiplicity="0..1" />
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialties">
+        <PropertyRef Name="SpecialtyId" />
+      </Principal>
+      <Dependent Role="Consultations">
+        <PropertyRef Name="SpecialtyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Menu_Menu">
+    <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+    <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menu">
+        <PropertyRef Name="MenuId" />
+      </Principal>
+      <Dependent Role="Menu1">
+        <PropertyRef Name="parent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Messages_Consultations">
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="0..1" />
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultations">
+        <PropertyRef Name="ConsultationId" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="ConsultationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Messages_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Messages">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Specialties_Professions">
+    <End Role="Professions" Type="Self.Professions" Multiplicity="1" />
+    <End Role="Specialties" Type="Self.Specialties" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professions">
+        <PropertyRef Name="ProfessionId" />
+      </Principal>
+      <Dependent Role="Specialties">
+        <PropertyRef Name="ProfessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transactions_Consultations">
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="0..1" />
+    <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultations">
+        <PropertyRef Name="ConsultationId" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="ConsultationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transactions_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Transactions">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Countries">
+    <End Role="Countries" Type="Self.Countries" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Countries">
+        <PropertyRef Name="CountryId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="CountryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetConsultantRating" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="numeric">
+    <Parameter Name="consultantId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="ConsultationsModelStoreContainer">
+    <EntitySet Name="AdminMessages" EntityType="Self.AdminMessages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consultants" EntityType="Self.Consultants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consultation_Statuses" EntityType="Self.Consultation_Statuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consultation_Time" EntityType="Self.Consultation_Time" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consultation_Types" EntityType="Self.Consultation_Types" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consultations" EntityType="Self.Consultations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Professions" EntityType="Self.Professions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Specialties" EntityType="Self.Specialties" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AdminMessages_AdminMessages" Association="Self.FK_AdminMessages_AdminMessages">
+      <End Role="AdminMessages" EntitySet="AdminMessages" />
+      <End Role="AdminMessages1" EntitySet="AdminMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultants_Users" Association="Self.FK_Consultants_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Consultants" EntitySet="Consultants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultation_Time_Consultations" Association="Self.FK_Consultation_Time_Consultations">
+      <End Role="Consultations" EntitySet="Consultations" />
+      <End Role="Consultation_Time" EntitySet="Consultation_Time" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultations_Consultants" Association="Self.FK_Consultations_Consultants">
+      <End Role="Consultants" EntitySet="Consultants" />
+      <End Role="Consultations" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultations_Consultation_Statuses" Association="Self.FK_Consultations_Consultation_Statuses">
+      <End Role="Consultation_Statuses" EntitySet="Consultation_Statuses" />
+      <End Role="Consultations" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultations_Consultation_Types" Association="Self.FK_Consultations_Consultation_Types">
+      <End Role="Consultation_Types" EntitySet="Consultation_Types" />
+      <End Role="Consultations" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultations_Professions" Association="Self.FK_Consultations_Professions">
+      <End Role="Professions" EntitySet="Professions" />
+      <End Role="Consultations" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultations_Specialties" Association="Self.FK_Consultations_Specialties">
+      <End Role="Specialties" EntitySet="Specialties" />
+      <End Role="Consultations" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
+      <End Role="Menu" EntitySet="Menu" />
+      <End Role="Menu1" EntitySet="Menu" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Messages_Consultations" Association="Self.FK_Messages_Consultations">
+      <End Role="Consultations" EntitySet="Consultations" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Messages_Users" Association="Self.FK_Messages_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Messages" EntitySet="Messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Specialties_Professions" Association="Self.FK_Specialties_Professions">
+      <End Role="Professions" EntitySet="Professions" />
+      <End Role="Specialties" EntitySet="Specialties" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transactions_Consultations" Association="Self.FK_Transactions_Consultations">
+      <End Role="Consultations" EntitySet="Consultations" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transactions_Users" Association="Self.FK_Transactions_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Transactions" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Countries" Association="Self.FK_Users_Countries">
+      <End Role="Countries" EntitySet="Countries" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,35 @@
+﻿@model Sovet247Admin.Models.Profession
+
+@{
+    ViewBag.Title = "Детали профессии";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Детали профессии</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.Profession_Title, "Профессия")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profession_Title)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.Active,"Активна")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.ProfessionId }) |
+    @Html.ActionLink("К списку профессий", "Index")
+</p>
