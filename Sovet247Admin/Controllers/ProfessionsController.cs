@@ -11,8 +11,10 @@ using Sovet247Admin.Models;
 
 namespace Sovet247Admin.Views
 {
+    [Authorize(Roles = "Администратор")]
     public class ProfessionsController : Controller
     {
+        
         private ConsultationsDbContext db = new ConsultationsDbContext();
 
         // GET: Professions

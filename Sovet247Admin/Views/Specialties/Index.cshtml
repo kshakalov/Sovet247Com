@@ -1,25 +1,25 @@
 ﻿@model IEnumerable<Sovet247Admin.Models.Specialty>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Специальности";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Специальности</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Добавить специальность", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Specialty_title)
+            Специальность
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.active)
+            Активна
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Profession.Profession_Title)
+            Профессия
         </th>
         <th></th>
     </tr>
@@ -36,9 +36,9 @@
             @Html.DisplayFor(modelItem => item.Profession.Profession_Title)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.SpecialtyId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.SpecialtyId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.SpecialtyId })
+            @Html.ActionLink("Изменить", "Edit", new { id=item.SpecialtyId }) |
+            @Html.ActionLink("Подробности", "Details", new { id=item.SpecialtyId }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.SpecialtyId })
         </td>
     </tr>
 }

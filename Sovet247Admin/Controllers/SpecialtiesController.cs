@@ -11,12 +11,12 @@ using Sovet247Admin.Models;
 
 namespace Sovet247Admin.Controllers
 {
+    [Authorize(Roles = "Администратор")]
     public class SpecialtiesController : Controller
     {
         private ConsultationsDbContext db = new ConsultationsDbContext();
 
         // GET: Specialties
-        [Authorize]
         public async Task<ActionResult> Index()
         {
             var specialties = db.Specialties.Include(s => s.Profession);
@@ -24,7 +24,6 @@ namespace Sovet247Admin.Controllers
         }
 
         // GET: Specialties/Details/5
-        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,7 +39,6 @@ namespace Sovet247Admin.Controllers
         }
 
         // GET: Specialties/Create
-        [Authorize]
         public ActionResult Create()
         {
             ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title");
@@ -52,7 +50,6 @@ namespace Sovet247Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<ActionResult> Create([Bind(Include = "SpecialtyId,Specialty_title,ProfessionId,active")] Specialty specialty)
         {
             if (ModelState.IsValid)
@@ -67,7 +64,6 @@ namespace Sovet247Admin.Controllers
         }
 
         // GET: Specialties/Edit/5
-        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -88,7 +84,6 @@ namespace Sovet247Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<ActionResult> Edit([Bind(Include = "SpecialtyId,Specialty_title,ProfessionId,active")] Specialty specialty)
         {
             if (ModelState.IsValid)
@@ -102,7 +97,6 @@ namespace Sovet247Admin.Controllers
         }
 
         // GET: Specialties/Delete/5
-        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -120,7 +114,6 @@ namespace Sovet247Admin.Controllers
         // POST: Specialties/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Specialty specialty = await db.Specialties.FindAsync(id);

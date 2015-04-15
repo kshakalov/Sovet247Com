@@ -324,9 +324,11 @@
     <Content Include="Views\Specialties\Details.cshtml" />
     <Content Include="Views\Specialties\Edit.cshtml" />
     <Content Include="Views\Specialties\Index.cshtml" />
+    <Content Include="Views\Shared\_MainMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
