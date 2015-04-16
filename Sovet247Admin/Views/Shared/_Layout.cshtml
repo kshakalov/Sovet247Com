@@ -20,7 +20,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Справочники", "Index", "Dictionaries")</li>
+                    <li>@*Html.ActionLink("Справочники", "Index", "Dictionaries")*@</li>
                     <li>@*@Html.ActionLink("About", "About", "Home")*@</li>
                     <li>@*@Html.ActionLink("Contact", "Contact", "Home")*@</li>
                 </ul>
@@ -29,7 +29,12 @@
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+        <div class="navbar-left" style="float:left;margin-top:90px;">
+            @Html.Partial("_MainMenu")
+        </div>
+        <div style="float:left;margin-left:20px;">
+            @RenderBody()
+        </div>
         <hr />
         <footer style="text-align:center;">
             <p>&copy; @DateTime.Now.Year - Совет 24/7 - консультации специалистов онлайн.</p>

@@ -9,17 +9,23 @@
 
 namespace Sovet247Admin.Models
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ConsultationsDbContext : DbContext
+    public partial class ConsultationsDbContext : IdentityDbContext<User,Role, int,CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public ConsultationsDbContext()
             : base("name=consultationsConnectionString")
         {
         }
-    
+
+        public static ConsultationsDbContext Create()
+        {
+            return new ConsultationsDbContext();
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();

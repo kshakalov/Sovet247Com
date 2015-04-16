@@ -12,10 +12,7 @@ namespace Sovet247Admin.Controllers
     {
         public ActionResult Index()
         {
-            ConsultationsDbContext _context=new ConsultationsDbContext();
-            var roleId=_context.Users.FirstOrDefault(u=>u.email==User.Identity.Name).RoleId;
-            ViewBag.Menu = _context.Menus.Where(m=>m.roles.Contains(roleId.ToString())).ToList();
-            return View();
+           return View();
         }
 
         public ActionResult About()

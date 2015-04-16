@@ -1,5 +1,7 @@
-﻿@{
-    List<Sovet247Admin.Models.Menu> menuList = ViewBag.Menu;    
+﻿@using Sovet247Admin.Models;
+@{ConsultationsDbContext _context=new ConsultationsDbContext();
+  var roleId=_context.Users.FirstOrDefault(u=>u.email==User.Identity.Name).RoleId;
+  List<Menu> menuList = _context.Menus.Where(m=>m.roles.Contains(roleId.ToString())).ToList();    
 }
 @{
     Layout = null;
@@ -7,7 +9,10 @@
 
 <ul class="menu">
 
-    @foreach (var mp in menuList.Where(p => p.parent_id == null))
+    @if(menuList!=null)
+    { 
+        
+        foreach (var mp in menuList.Where(p => p.parent_id == null))
     {
 
         <li>
@@ -26,6 +31,7 @@
 
         </li>
     }
+    }   
 </ul>
 
 

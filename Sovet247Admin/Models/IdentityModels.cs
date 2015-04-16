@@ -8,7 +8,7 @@ namespace Sovet247Admin.Models
 {
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
    
-    public class ApplicationDbContext : IdentityDbContext<User,Role, int,CustomUserLogin, CustomUserRole, CustomUserClaim>
+   /* public class ApplicationDbContext : IdentityDbContext<User,Role, int,CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public ApplicationDbContext()
             : base("name=ConsultationsDbContext")
@@ -19,7 +19,7 @@ namespace Sovet247Admin.Models
         {
             return new ApplicationDbContext();
         }
-    }
+    }*/
 
     public class CustomUserRole : IdentityUserRole<int> { }
     public class CustomUserClaim : IdentityUserClaim<int> { }
@@ -34,7 +34,7 @@ namespace Sovet247Admin.Models
     public class CustomUserStore : UserStore<User, Role, int,
         CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
-        public CustomUserStore(ApplicationDbContext context)
+        public CustomUserStore(ConsultationsDbContext context)
             : base(context)
         {
         }
