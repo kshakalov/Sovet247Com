@@ -41,9 +41,9 @@ namespace Sovet247Admin.Models
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Profession> Professions { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        new public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Specialty> Specialties { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        new public virtual DbSet<User> Users { get; set; }
     }
 }

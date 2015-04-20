@@ -52,7 +52,7 @@ namespace Sovet247Admin.Models
         public virtual ICollection<Transaction> Transactions { get; set; }
 
         [NotMapped]
-        public int Id
+        new public virtual int Id
         {
             get { return UserId; }
             set { UserId = value; }
@@ -60,7 +60,7 @@ namespace Sovet247Admin.Models
 
 
         [NotMapped]
-        public string UserName
+        new public virtual string UserName
         {
             get
             {
