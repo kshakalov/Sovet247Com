@@ -14,18 +14,17 @@ namespace Sovet247Admin.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ConsultationsDbContext : IdentityDbContext<User,Role, int,CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public partial class ConsultationsDbContext : IdentityDbContext
     {
         public ConsultationsDbContext()
             : base("name=consultationsConnectionString")
         {
         }
-
+    
         public static ConsultationsDbContext Create()
         {
             return new ConsultationsDbContext();
         }
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -41,9 +40,10 @@ namespace Sovet247Admin.Models
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Profession> Professions { get; set; }
-        new public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Specialty> Specialties { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
-        new public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

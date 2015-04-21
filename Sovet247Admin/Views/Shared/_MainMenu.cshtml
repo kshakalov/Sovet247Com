@@ -3,7 +3,7 @@
   List<Menu> menuList = null;
   if(User.Identity.IsAuthenticated)
   { 
-  var roleId=_context.Users.FirstOrDefault(u=>u.email==User.Identity.Name).RoleId;
+  var roleId=_context.Users.FirstOrDefault(u=>u.UserEmail==User.Identity.Name).RoleId;
   menuList = _context.Menus.Where(m=>m.roles.Contains(roleId.ToString())).ToList();    
   }
 }

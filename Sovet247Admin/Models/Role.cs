@@ -13,26 +13,25 @@ namespace Sovet247Admin.Models
     using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-    
-    public partial class Role:IdentityRole<int, CustomUserRole>, IRole<int>
+
+    public partial class Role : IdentityRole<int, CustomUserRole>, IRole<int>
     {
         public Role()
         {
             this.Users = new HashSet<User>();
         }
-    
+
         public int RoleId { get; set; }
         public string role_title { get; set; }
-    
+
         public virtual ICollection<User> Users { get; set; }
-        [NotMapped]
-        new public int Id
+
+        int IRole<int>.Id
         {
             get { return RoleId; }
         }
-        [NotMapped]
-        new public string Name
+
+        string IRole<int>.Name
         {
             get
             {
@@ -40,7 +39,7 @@ namespace Sovet247Admin.Models
             }
             set
             {
-                role_title=value;
+                role_title = value;
             }
         }
     }

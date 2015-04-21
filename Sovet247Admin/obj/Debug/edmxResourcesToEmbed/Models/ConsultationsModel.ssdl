@@ -155,7 +155,7 @@
     <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="nickname" Type="nvarchar" MaxLength="50" />
     <Property Name="password" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="email" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="UserEmail" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="firstname" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="lastname" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="middlename" Type="nvarchar" MaxLength="128" />

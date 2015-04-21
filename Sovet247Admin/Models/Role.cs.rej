@@ -1,0 +1,9 @@
+diff a/Sovet247Admin/Models/Role.cs b/Sovet247Admin/Models/Role.cs	(rejected hunks)
+@@ -0,6 +0,7 @@
+ //------------------------------------------------------------------------------
+ 
+ namespace Sovet247Admin.Models
++{
+     using Microsoft.AspNet.Identity.EntityFramework;
+     using Microsoft.AspNet.Identity;
+     using System;

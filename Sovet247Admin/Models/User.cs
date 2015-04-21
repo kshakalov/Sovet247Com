@@ -9,15 +9,14 @@
 
 namespace Sovet247Admin.Models
 {
-    using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System.Security.Claims;
     using System.Threading.Tasks;
-    using Microsoft.AspNet.Identity.EntityFramework;
     
-    public partial class User:IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim> ,IUser<int>
+    public partial class User:IdentityUser<int,CustomUserLogin, CustomUserRole, CustomUserClaim>, IUser<int>
     {
         public User()
         {
@@ -29,7 +28,7 @@ namespace Sovet247Admin.Models
         public int UserId { get; set; }
         public string nickname { get; set; }
         public string password { get; set; }
-        public string email { get; set; }
+        public string UserEmail { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
         public string middlename { get; set; }
@@ -51,35 +50,12 @@ namespace Sovet247Admin.Models
         public virtual Role Role { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
 
-        [NotMapped]
-        new public virtual int Id
-        {
-            get { return UserId; }
-            set { UserId = value; }
-        }
-
-
-        [NotMapped]
-        new public virtual string UserName
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                email=value;
-            }
-        }
-
-        
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User,int> manager)
+        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<User, int> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             return userIdentity;
         }
-
     }
 }
