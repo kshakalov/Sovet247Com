@@ -13,17 +13,17 @@ namespace Sovet247Admin.Models
     using Microsoft.AspNet.Identity;
     using System;
     using System.Collections.Generic;
-    
-    public partial class Role:IdentityRole<int, CustomUserRole>, IRole<int>
+
+    public partial class Role : IdentityRole<int, CustomUserRole>, IRole<int>
     {
         public Role()
         {
             this.Users = new HashSet<User>();
         }
-    
+
         public int RoleId { get; set; }
         public string role_title { get; set; }
-    
+
         public virtual ICollection<User> Users { get; set; }
 
         int IRole<int>.Id
@@ -39,7 +39,7 @@ namespace Sovet247Admin.Models
             }
             set
             {
-                role_title=value;
+                role_title = value;
             }
         }
     }

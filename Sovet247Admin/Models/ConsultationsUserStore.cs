@@ -35,7 +35,7 @@ namespace Sovet247Admin.Models
 
         public Task<User> FindByNameAsync(string userName)
         {
-            Task<User> task = _context.Users.Where(u => u.email == userName).FirstOrDefaultAsync();
+            Task<User> task = _context.Users.Where(u => u.UserEmail == userName).FirstOrDefaultAsync();
             return task;
         }
 
