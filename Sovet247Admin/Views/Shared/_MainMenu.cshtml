@@ -1,7 +1,11 @@
 ﻿@using Sovet247Admin.Models;
 @{ConsultationsDbContext _context=new ConsultationsDbContext();
+  List<Menu> menuList = null;
+  if(User.Identity.IsAuthenticated)
+  { 
   var roleId=_context.Users.FirstOrDefault(u=>u.email==User.Identity.Name).RoleId;
-  List<Menu> menuList = _context.Menus.Where(m=>m.roles.Contains(roleId.ToString())).ToList();    
+  menuList = _context.Menus.Where(m=>m.roles.Contains(roleId.ToString())).ToList();    
+  }
 }
 @{
     Layout = null;
