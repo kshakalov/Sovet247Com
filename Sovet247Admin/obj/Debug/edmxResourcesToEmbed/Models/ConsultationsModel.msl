@@ -169,7 +169,7 @@
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="nickname" ColumnName="nickname" />
           <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="firstname" ColumnName="firstname" />
           <ScalarProperty Name="lastname" ColumnName="lastname" />
           <ScalarProperty Name="middlename" ColumnName="middlename" />

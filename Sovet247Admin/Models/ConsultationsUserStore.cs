@@ -29,13 +29,13 @@ namespace Sovet247Admin.Models
 
         public Task<User> FindByIdAsync(int userId)
         {
-            Task<User> task = _context.Users.FindAsync(userId);
+            Task<User> task = _context.Users.Where(u=>u.UserId==userId).FirstOrDefaultAsync();
             return task;
         }
 
         public Task<User> FindByNameAsync(string userName)
         {
-            Task<User> task = _context.Users.Where(u => u.UserEmail == userName).FirstOrDefaultAsync();
+            Task<User> task = _context.Users.Where(u => u.email == userName).FirstOrDefaultAsync();
             return task;
         }
 

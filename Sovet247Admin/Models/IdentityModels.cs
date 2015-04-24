@@ -3,10 +3,24 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Sovet247Admin.Models;
 
 namespace Sovet247Admin.Models
 {
+    // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
+
+    /* public class ApplicationDbContext : IdentityDbContext<User,Role, int,CustomUserLogin, CustomUserRole, CustomUserClaim>
+     {
+         public ApplicationDbContext()
+             : base("name=ConsultationsDbContext")
+         {
+         }
+
+         public static ApplicationDbContext Create()
+         {
+             return new ApplicationDbContext();
+         }
+     }*/
+
     public class CustomUserRole : IdentityUserRole<int> { }
     public class CustomUserClaim : IdentityUserClaim<int> { }
     public class CustomUserLogin : IdentityUserLogin<int> { }
@@ -17,11 +31,12 @@ namespace Sovet247Admin.Models
         public CustomRole(string name) { Name = name; }
     }
 
-    public class CustomRoleStore : RoleStore<Role, int, CustomUserRole>, IRoleStore<Role,int>
+    public class CustomRoleStore : RoleStore<Role, int, CustomUserRole>, IRoleStore<Role, int>
     {
         ConsultationsDbContext _context;
-        public CustomRoleStore(ConsultationsDbContext context):base(context)
-        {            
+        public CustomRoleStore(ConsultationsDbContext context)
+            : base(context)
+        {
             _context = context;
         }
 
@@ -38,7 +53,7 @@ namespace Sovet247Admin.Models
 
         Task<Role> IRoleStore<Role, int>.FindByIdAsync(int roleId)
         {
-            Task<Role> task=_context.Roles.FirstOrDefaultAsync(r => r.RoleId == roleId);
+            Task<Role> task = _context.Roles.FirstOrDefaultAsync(r => r.RoleId == roleId);
             return task;
         }
 
@@ -57,5 +72,5 @@ namespace Sovet247Admin.Models
         {
             _context.Dispose();
         }
-    } 
+    }
 }
