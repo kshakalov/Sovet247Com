@@ -15,7 +15,7 @@ using Sovet247Admin.Models;
 namespace Sovet247Admin
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
-    public class ApplicationUserManager : UserManager<User,int>
+    public class ApplicationUserManager : UserManager<ConsultationsUser,int>
     {
         public ApplicationUserManager(ConsultationsUserStore store)
             : base(store)
@@ -26,9 +26,9 @@ namespace Sovet247Admin
         {
             var manager = new ApplicationUserManager(new ConsultationsUserStore(new ConsultationsDbContext()));
 
-            var roleManager=new ApplicationRoleManager(new CustomRoleStore(new ConsultationsDbContext()));
+            var roleManager=new ApplicationRoleManager(new ConsultationsRoleStore(new ConsultationsIdentityDbContext()));
             // Configure validation logic for usernames
-            manager.UserValidator = new UserValidator<User,int>(manager)
+            manager.UserValidator = new UserValidator<ConsultationsUser,int>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
                 RequireUniqueEmail = true
@@ -60,14 +60,14 @@ namespace Sovet247Admin
             if (dataProtectionProvider != null)
             {
                 manager.UserTokenProvider = 
-                    new DataProtectorTokenProvider<User,int>(dataProtectionProvider.Create("ASP.NET Identity"));
+                    new DataProtectorTokenProvider<ConsultationsUser,int>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
         }
     }
 
     // Configure the application sign-in manager which is used in this application.
-    public class ApplicationSignInManager : SignInManager<User, int>
+    public class ApplicationSignInManager : SignInManager<ConsultationsUser, int>
     {
         public ApplicationSignInManager(ApplicationUserManager userManager, IAuthenticationManager authenticationManager)
             : base(userManager, authenticationManager)
@@ -85,8 +85,8 @@ namespace Sovet247Admin
         }
     }
     
-    public class ApplicationRoleManager:RoleManager<Role,int>
+    public class ApplicationRoleManager:RoleManager<ConsultationsRole,int>
     {
-        public ApplicationRoleManager(CustomRoleStore store) : base(store) { }
+        public ApplicationRoleManager(ConsultationsRoleStore store) : base(store) { }
     }
 }

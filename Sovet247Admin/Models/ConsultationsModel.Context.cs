@@ -14,16 +14,11 @@ namespace Sovet247Admin.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
 
-    public partial class ConsultationsDbContext : IdentityDbContext<User, Role, int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public partial class ConsultationsDbContext:DbContext
     {
         public ConsultationsDbContext()
             : base("name=consultationsConnectionString")
         {
-        }
-
-        public static ConsultationsDbContext Create()
-        {
-            return new ConsultationsDbContext();
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

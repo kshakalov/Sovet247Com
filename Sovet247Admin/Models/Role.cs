@@ -14,7 +14,7 @@ namespace Sovet247Admin.Models
     using System;
     using System.Collections.Generic;
 
-    public partial class Role : IdentityRole<int, CustomUserRole>, IRole<int>
+    public partial class Role
     {
         public Role()
         {
@@ -25,22 +25,5 @@ namespace Sovet247Admin.Models
         public string role_title { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
-
-        int IRole<int>.Id
-        {
-            get { return RoleId; }
-        }
-
-        string IRole<int>.Name
-        {
-            get
-            {
-                return role_title;
-            }
-            set
-            {
-                role_title = value;
-            }
-        }
     }
 }

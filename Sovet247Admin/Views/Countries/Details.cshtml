@@ -1,0 +1,33 @@
+﻿@model Sovet247Admin.Models.Country
+
+@{
+    ViewBag.Title = "Просмотр страны";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Просмотр страны</h2>
+
+<div>
+   <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.country_code, "Код страны")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country_code)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.country_name, "Наименование страны")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country_name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.CountryId }) |
+    @Html.ActionLink("Вернуться к списку стран", "Index")
+</p>

@@ -151,7 +151,7 @@ namespace Sovet247Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, email = model.Email };
+                var user = new ConsultationsUser { UserName = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -367,7 +367,7 @@ namespace Sovet247Admin.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new User { UserName = model.Email, email = model.Email };
+                var user = new ConsultationsUser { UserName = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

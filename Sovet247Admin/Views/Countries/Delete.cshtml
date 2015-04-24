@@ -1,0 +1,39 @@
+﻿@model Sovet247Admin.Models.Country
+
+@{
+    ViewBag.Title = "Удадление страны";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Удаление страны</h2>
+
+<h3>Вы действительно хотите удалить страну?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.LabelFor(model => model.country_code, "Код страны")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country_code)
+        </dd>
+
+        <dt>
+            @Html.LabelFor(model => model.country_name, "Наименование страны")
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.country_name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к списку стран", "Index")
+        </div>
+    }
+</div>

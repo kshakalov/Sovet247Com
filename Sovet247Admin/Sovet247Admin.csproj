@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CountriesController.cs" />
     <Compile Include="Controllers\DictionariesController.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -200,6 +201,7 @@
     <Compile Include="Models\Consultation.cs">
       <DependentUpon>ConsultationsModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConsultationsIdentityDbContext.cs" />
     <Compile Include="Models\ConsultationsModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -216,6 +218,12 @@
       <DependentUpon>ConsultationsModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ConsultationsPasswordHasher.cs" />
+    <Compile Include="Models\ConsultationsRole.cs" />
+    <Compile Include="Models\ConsultationsRoleStore.cs" />
+    <Compile Include="Models\ConsultationsUser.cs" />
+    <Compile Include="Models\ConsultationsUserClaim.cs" />
+    <Compile Include="Models\ConsultationsUserLogin.cs" />
+    <Compile Include="Models\ConsultationsUserRole.cs" />
     <Compile Include="Models\ConsultationsUserStore.cs" />
     <Compile Include="Models\Consultation_Statuses.cs">
       <DependentUpon>ConsultationsModel.tt</DependentUpon>
@@ -229,7 +237,6 @@
     <Compile Include="Models\Country.cs">
       <DependentUpon>ConsultationsModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Menu.cs">
       <DependentUpon>ConsultationsModel.tt</DependentUpon>
@@ -356,10 +363,14 @@
     <Content Include="Views\Specialties\Edit.cshtml" />
     <Content Include="Views\Specialties\Index.cshtml" />
     <Content Include="Views\Shared\_MainMenu.cshtml" />
+    <Content Include="Views\Countries\Create.cshtml" />
+    <Content Include="Views\Countries\Delete.cshtml" />
+    <Content Include="Views\Countries\Details.cshtml" />
+    <Content Include="Views\Countries\Edit.cshtml" />
+    <Content Include="Views\Countries\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Countries\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
