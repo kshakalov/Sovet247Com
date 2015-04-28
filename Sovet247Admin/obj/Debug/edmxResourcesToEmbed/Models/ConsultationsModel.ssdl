@@ -84,7 +84,7 @@
     <Key>
       <PropertyRef Name="MenuId" />
     </Key>
-    <Property Name="MenuId" Type="int" Nullable="false" />
+    <Property Name="MenuId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="title" Type="nvarchar" MaxLength="512" />
     <Property Name="url" Type="nvarchar" MaxLength="1024" />
     <Property Name="roles" Type="nvarchar" MaxLength="50" />
@@ -180,6 +180,30 @@
       </Principal>
       <Dependent Role="AdminMessages1">
         <PropertyRef Name="parentMessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultants_Professions">
+    <End Role="Professions" Type="Self.Professions" Multiplicity="1" />
+    <End Role="Consultants" Type="Self.Consultants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Professions">
+        <PropertyRef Name="ProfessionId" />
+      </Principal>
+      <Dependent Role="Consultants">
+        <PropertyRef Name="ProfessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultants_Specialties">
+    <End Role="Specialties" Type="Self.Specialties" Multiplicity="0..1" />
+    <End Role="Consultants" Type="Self.Consultants" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialties">
+        <PropertyRef Name="SpecialtyId" />
+      </Principal>
+      <Dependent Role="Consultants">
+        <PropertyRef Name="SpecialtyId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -385,6 +409,14 @@
     <AssociationSet Name="FK_AdminMessages_AdminMessages" Association="Self.FK_AdminMessages_AdminMessages">
       <End Role="AdminMessages" EntitySet="AdminMessages" />
       <End Role="AdminMessages1" EntitySet="AdminMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultants_Professions" Association="Self.FK_Consultants_Professions">
+      <End Role="Professions" EntitySet="Professions" />
+      <End Role="Consultants" EntitySet="Consultants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultants_Specialties" Association="Self.FK_Consultants_Specialties">
+      <End Role="Specialties" EntitySet="Specialties" />
+      <End Role="Consultants" EntitySet="Consultants" />
     </AssociationSet>
     <AssociationSet Name="FK_Consultants_Users" Association="Self.FK_Consultants_Users">
       <End Role="Users" EntitySet="Users" />

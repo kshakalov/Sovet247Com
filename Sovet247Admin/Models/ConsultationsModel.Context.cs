@@ -9,23 +9,22 @@
 
 namespace Sovet247Admin.Models
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
-    public partial class ConsultationsDbContext:DbContext
+    
+    public partial class ConsultationsDbContext : DbContext
     {
         public ConsultationsDbContext()
-            : base("name=consultationsConnectionString")
+            : base("name=ConsultationsDbContext")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<AdminMessage> AdminMessages { get; set; }
         public virtual DbSet<Consultant> Consultants { get; set; }
         public virtual DbSet<Consultation_Statuses> Consultation_Statuses { get; set; }
@@ -38,6 +37,7 @@ namespace Sovet247Admin.Models
         public virtual DbSet<Profession> Professions { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Specialty> Specialties { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
         public virtual DbSet<User> Users { get; set; }
     }

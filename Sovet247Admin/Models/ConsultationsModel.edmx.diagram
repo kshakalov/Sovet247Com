@@ -36,6 +36,8 @@
         <AssociationConnector Association="ConsultationsModel.FK_Specialties_Professions" ManuallyRouted="false" />
         <AssociationConnector Association="ConsultationsModel.FK_Users_Roles" ManuallyRouted="false" />
         <AssociationConnector Association="ConsultationsModel.FK_Transactions_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultants_Professions" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultants_Specialties" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

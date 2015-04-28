@@ -11,6 +11,7 @@ namespace Sovet247Admin.Models
 {
     using System;
     using System.Collections.Generic;
+using System.ComponentModel;
     
     public partial class Consultant
     {
@@ -24,6 +25,7 @@ namespace Sovet247Admin.Models
         public Nullable<int> SpecialtyId { get; set; }
         public string specialization { get; set; }
         public int UserId { get; set; }
+        [DisplayName("Образование")]
         public string education { get; set; }
         public string workplace { get; set; }
         public bool active { get; set; }
@@ -31,7 +33,13 @@ namespace Sovet247Admin.Models
         public Nullable<decimal> comission_percent { get; set; }
         public string photo_url { get; set; }
     
+        [DisplayName("Пользователь")]
         public virtual User User { get; set; }
+        [DisplayName("Консультации")]
         public virtual ICollection<Consultation> Consultations { get; set; }
+        [DisplayName("Профессия")]
+        public virtual Profession Profession { get; set; }
+        [DisplayName("Специальность")]
+        public virtual Specialty Specialty { get; set; }
     }
 }

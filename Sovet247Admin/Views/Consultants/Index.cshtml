@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Sovet247Admin.Models.Consultant>
+
+@{
+    ViewBag.Title = "Список экспертов";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список экспертов</h2>
+
+<p>
+    @Html.ActionLink("Добавить эксперта", "Create")
+</p>
+<table class="table">
+    <tr>
+       <th>
+            @Html.DisplayNameFor(model => model.specialization)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.education)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.workplace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.short_resume)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comission_percent)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.photo_url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.nickname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profession.Profession_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Specialty.Specialty_title)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.specialization)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.education)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.workplace)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.short_resume)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comission_percent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.photo_url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.nickname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profession.Profession_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Specialty.Specialty_title)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ConsultantId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ConsultantId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ConsultantId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -11,20 +11,25 @@ namespace Sovet247Admin.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
     public partial class Specialty
     {
         public Specialty()
         {
             this.Consultations = new HashSet<Consultation>();
+            this.Consultants = new HashSet<Consultant>();
         }
     
         public int SpecialtyId { get; set; }
+        [DisplayName("Специальность")]
         public string Specialty_title { get; set; }
         public int ProfessionId { get; set; }
+        [DisplayName("Активна")]
         public bool active { get; set; }
     
         public virtual ICollection<Consultation> Consultations { get; set; }
         public virtual Profession Profession { get; set; }
+        public virtual ICollection<Consultant> Consultants { get; set; }
     }
 }

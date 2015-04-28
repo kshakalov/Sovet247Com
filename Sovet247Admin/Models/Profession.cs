@@ -11,6 +11,7 @@ namespace Sovet247Admin.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
     public partial class Profession
     {
@@ -18,13 +19,18 @@ namespace Sovet247Admin.Models
         {
             this.Consultations = new HashSet<Consultation>();
             this.Specialties = new HashSet<Specialty>();
+            this.Consultants = new HashSet<Consultant>();
         }
     
+        
         public int ProfessionId { get; set; }
+        [DisplayName("Профессия")]
         public string Profession_Title { get; set; }
+        [DisplayName("Активна")]
         public bool Active { get; set; }
     
         public virtual ICollection<Consultation> Consultations { get; set; }
         public virtual ICollection<Specialty> Specialties { get; set; }
+        public virtual ICollection<Consultant> Consultants { get; set; }
     }
 }

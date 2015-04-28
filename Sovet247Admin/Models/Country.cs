@@ -11,6 +11,7 @@ namespace Sovet247Admin.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
     public partial class Country
     {
@@ -20,7 +21,9 @@ namespace Sovet247Admin.Models
         }
     
         public int CountryId { get; set; }
+        [DisplayName("Код страны")]
         public string country_code { get; set; }
+        [DisplayName("Наименование страны")]
         public string country_name { get; set; }
     
         public virtual ICollection<User> Users { get; set; }

@@ -11,7 +11,7 @@ namespace Sovet247Admin.Models
 {
     using System;
     using System.Collections.Generic;
-
+    
     public partial class User
     {
         public User()
@@ -45,7 +45,5 @@ namespace Sovet247Admin.Models
         public virtual ICollection<Message> Messages { get; set; }
         public virtual Role Role { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
-
-       
     }
 }

@@ -31,6 +31,8 @@
     <Property Name="photo_url" Type="String" MaxLength="512" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="User" Relationship="Self.FK_Consultants_Users" FromRole="Consultants" ToRole="Users" />
     <NavigationProperty Name="Consultations" Relationship="Self.FK_Consultations_Consultants" FromRole="Consultants" ToRole="Consultations" />
+    <NavigationProperty Name="Profession" Relationship="ConsultationsModel.FK_Consultants_Professions" FromRole="Consultant" ToRole="Profession" />
+    <NavigationProperty Name="Specialty" Relationship="ConsultationsModel.FK_Consultants_Specialties" FromRole="Consultant" ToRole="Specialty" />
   </EntityType>
   <EntityType Name="Consultation_Statuses">
     <Key>
@@ -132,6 +134,7 @@
     <Property Name="Active" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Consultations" Relationship="Self.FK_Consultations_Professions" FromRole="Professions" ToRole="Consultations" />
     <NavigationProperty Name="Specialties" Relationship="Self.FK_Specialties_Professions" FromRole="Professions" ToRole="Specialties" />
+    <NavigationProperty Name="Consultants" Relationship="ConsultationsModel.FK_Consultants_Professions" FromRole="Profession" ToRole="Consultant" />
   </EntityType>
   <EntityType Name="Role">
     <Key>
@@ -151,6 +154,7 @@
     <Property Name="active" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="Consultations" Relationship="Self.FK_Consultations_Specialties" FromRole="Specialties" ToRole="Consultations" />
     <NavigationProperty Name="Profession" Relationship="Self.FK_Specialties_Professions" FromRole="Specialties" ToRole="Professions" />
+    <NavigationProperty Name="Consultants" Relationship="ConsultationsModel.FK_Consultants_Specialties" FromRole="Specialty" ToRole="Consultant" />
   </EntityType>
   <EntityType Name="sysdiagram">
     <Key>
@@ -395,7 +399,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="consultationsConnectionString" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="ConsultationsDbContext" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AdminMessages" EntityType="Self.AdminMessage" />
     <EntitySet Name="Consultants" EntityType="Self.Consultant" />
     <EntitySet Name="Consultation_Statuses" EntityType="Self.Consultation_Statuses" />
@@ -475,5 +479,37 @@
       <End Role="Users" EntitySet="Users" />
       <End Role="Transactions" EntitySet="Transactions" />
     </AssociationSet>
+    <AssociationSet Name="FK_Consultants_Professions" Association="ConsultationsModel.FK_Consultants_Professions">
+      <End Role="Profession" EntitySet="Professions" />
+      <End Role="Consultant" EntitySet="Consultants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultants_Specialties" Association="ConsultationsModel.FK_Consultants_Specialties">
+      <End Role="Specialty" EntitySet="Specialties" />
+      <End Role="Consultant" EntitySet="Consultants" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_Consultants_Professions">
+    <End Type="ConsultationsModel.Profession" Role="Profession" Multiplicity="1" />
+    <End Type="ConsultationsModel.Consultant" Role="Consultant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profession">
+        <PropertyRef Name="ProfessionId" />
+      </Principal>
+      <Dependent Role="Consultant">
+        <PropertyRef Name="ProfessionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Consultants_Specialties">
+    <End Type="ConsultationsModel.Specialty" Role="Specialty" Multiplicity="0..1" />
+    <End Type="ConsultationsModel.Consultant" Role="Consultant" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialty">
+        <PropertyRef Name="SpecialtyId" />
+      </Principal>
+      <Dependent Role="Consultant">
+        <PropertyRef Name="SpecialtyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
