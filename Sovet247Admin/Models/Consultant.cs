@@ -23,14 +23,20 @@ using System.ComponentModel;
         public int ConsultantId { get; set; }
         public int ProfessionId { get; set; }
         public Nullable<int> SpecialtyId { get; set; }
+        [DisplayName("Специализация")]
         public string specialization { get; set; }
         public int UserId { get; set; }
         [DisplayName("Образование")]
         public string education { get; set; }
+        [DisplayName("Место работы")]
         public string workplace { get; set; }
+        [DisplayName("Активен")]
         public bool active { get; set; }
+        [DisplayName("Краткое резюме")]
         public string short_resume { get; set; }
+        [DisplayName("Процент комиссии")]
         public Nullable<decimal> comission_percent { get; set; }
+        [DisplayName("Фотография")]
         public string photo_url { get; set; }
     
         [DisplayName("Пользователь")]

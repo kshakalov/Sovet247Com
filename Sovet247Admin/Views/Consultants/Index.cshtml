@@ -12,29 +12,11 @@
 </p>
 <table class="table">
     <tr>
-       <th>
-            @Html.DisplayNameFor(model => model.specialization)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.education)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.workplace)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.active)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.short_resume)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.comission_percent)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.photo_url)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.nickname)
+            @Html.DisplayNameFor(model => model.User.firstname)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Profession.Profession_Title)
@@ -42,34 +24,26 @@
         <th>
             @Html.DisplayNameFor(model => model.Specialty.Specialty_title)
         </th>
+       <th>
+            @Html.DisplayNameFor(model => model.specialization)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comission_percent)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.specialization)
+            <img src="@item.photo_url" alt="@item.User.firstname @item.User.lastname" style="width:70px;" />
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.education)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.workplace)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.active)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.short_resume)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.comission_percent)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.photo_url)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.nickname)
+            @Html.DisplayFor(modelItem => item.User.firstname) @Html.DisplayFor(modelItem=>item.User.lastname)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Profession.Profession_Title)
@@ -78,9 +52,19 @@
             @Html.DisplayFor(modelItem => item.Specialty.Specialty_title)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ConsultantId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ConsultantId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ConsultantId })
+            @Html.DisplayFor(modelItem => item.specialization)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comission_percent)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.ConsultantId }) |
+            @Html.ActionLink("Детали", "Details", new { id=item.ConsultantId }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ConsultantId })
         </td>
     </tr>
 }
