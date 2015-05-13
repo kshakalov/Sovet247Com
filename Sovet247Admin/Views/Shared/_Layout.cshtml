@@ -29,16 +29,18 @@
         </div>
     </div>
     <div class="container body-content">
-        <div class="navbar-left" style="float:left;margin-top:90px;">
+        <div class="navbar-left" style="float:left;margin-top:90px;width:20%;">
             @Html.Partial("_MainMenu")
         </div>
-        <div style="float:left;margin-left:20px; min-width:400px;">
+        <div style="float:left;margin-left:20px; min-width:400px;max-width:78%;">
             @RenderBody()
         </div>
         <hr />
-        <footer style="text-align:center;">
-            <p>&copy; @DateTime.Now.Year - Совет 24/7 - консультации специалистов онлайн.</p>
-        </footer>
+        <div style="clear:both;">
+            <footer style="text-align:center;">
+                <p>&copy; @DateTime.Now.Year - Совет 24/7 - консультации специалистов онлайн.</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

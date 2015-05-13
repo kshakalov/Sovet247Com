@@ -15,11 +15,16 @@ namespace Sovet247Admin.Controllers
     public class ConsultantsController : Controller
     {
         private ConsultationsDbContext db = new ConsultationsDbContext();
-
+        
         // GET: Consultants
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(string searchConsultantName)
         {
             var consultants = db.Consultants.Include(c => c.User).Include(c => c.Profession).Include(c=>c.Specialty);
+            if(!String.IsNullOrEmpty(searchConsultantName))
+            {
+                consultants = consultants.Where(c => c.User.firstname.Contains(searchConsultantName)
+                    || c.User.lastname.Contains(searchConsultantName));
+            }
             return View(await consultants.ToListAsync());
         }
 
@@ -43,6 +48,7 @@ namespace Sovet247Admin.Controllers
         {
             ViewBag.UserId = new SelectList(db.Users, "UserId", "nickname");
             ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title");
+            ViewBag.SpecialtyId = new SelectList(db.Specialties, "SpecialtyId", "Specialty_Title");
             return View();
         }
 
@@ -62,6 +68,7 @@ namespace Sovet247Admin.Controllers
 
             ViewBag.UserId = new SelectList(db.Users, "UserId", "nickname", consultant.UserId);
             ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
+            ViewBag.SpecialtyId = new SelectList(db.Specialties.Where(p => p.ProfessionId == consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
             return View(consultant);
         }
 
@@ -77,8 +84,10 @@ namespace Sovet247Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "UserId", "nickname", consultant.UserId);
+            ViewBag.UserId = new SelectList(db.Users, "UserId", "lastname", consultant.UserId);
+            TempData["tmpProfessionId"]=consultant.ProfessionId;
             ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
+            ViewBag.SpecialtyId = new SelectList(db.Specialties.Where(p=>p.ProfessionId==consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
             return View(consultant);
         }
 
@@ -87,9 +96,9 @@ namespace Sovet247Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ConsultantId,ProfessionId,SpecialtyId,specialization,UserId,education,workplace,active,short_resume,comission_percent,photo_url")] Consultant consultant)
+        public async Task<ActionResult> Edit([Bind(Include = "ConsultantId,ProfessionId,SpecialtyId,specialization,UserId,education,workplace,active,short_resume,comission_percent,photo_url, tmpProfessionId")] Consultant consultant)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && consultant.ProfessionId == (int?)TempData["tmpProfessionId"])
             {
                 db.Entry(consultant).State = EntityState.Modified;
                 await db.SaveChangesAsync();
@@ -97,6 +106,8 @@ namespace Sovet247Admin.Controllers
             }
             ViewBag.UserId = new SelectList(db.Users, "UserId", "nickname", consultant.UserId);
             ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
+            ViewBag.SpecialtyId = new SelectList(db.Specialties.Where(p => p.ProfessionId == consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
+            TempData["tmpProfessionId"] = consultant.ProfessionId;
             return View(consultant);
         }
 

@@ -1,22 +1,41 @@
 ﻿@model Sovet247Admin.Models.Consultant
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Данные эксперта";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>@Html.DisplayFor(model => model.User.firstname) @Html.DisplayFor(model => model.User.lastname)</h2>
 
 <div>
-    <h4>Consultant</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.SpecialtyId)
+            <img src="@Html.DisplayFor(model => model.photo_url)" alt="@Html.DisplayFor(model=>model.User.firstname) @Html.DisplayFor(model=>model.User.lastname)" width="150px;" />
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.nickname)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SpecialtyId)
+            @Html.DisplayFor(model => model.User.nickname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profession.Profession_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profession.Profession_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Specialty.Specialty_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specialty.Specialty_title)
         </dd>
 
         <dt>
@@ -44,19 +63,19 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.active)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.active)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.short_resume)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.short_resume)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active)
         </dd>
 
         <dt>
@@ -67,33 +86,9 @@
             @Html.DisplayFor(model => model.comission_percent)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.photo_url)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.photo_url)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.nickname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.nickname)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Profession.Profession_Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Profession.Profession_Title)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ConsultantId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.ConsultantId }) |
+    @Html.ActionLink("Вернуться к списку", "Index")
 </p>

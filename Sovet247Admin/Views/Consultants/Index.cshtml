@@ -1,11 +1,19 @@
 ﻿@model IEnumerable<Sovet247Admin.Models.Consultant>
 
 @{
-    ViewBag.Title = "Список экспертов";
+    ViewBag.Title = "Список экспертов";    
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Список экспертов</h2>
+
+<div>
+    @using(Html.BeginForm())
+    {
+        <p>Найти по имени: @Html.TextBox("searchConsultantName") <input type="submit" value="Найти" /></p>
+    }
+
+</div>
 
 <p>
     @Html.ActionLink("Добавить эксперта", "Create")
@@ -62,8 +70,8 @@
             @Html.DisplayFor(modelItem => item.comission_percent)
         </td>
         <td>
-            @Html.ActionLink("Изменить", "Edit", new { id=item.ConsultantId }) |
-            @Html.ActionLink("Детали", "Details", new { id=item.ConsultantId }) |
+            @Html.ActionLink("Изменить", "Edit", new { id=item.ConsultantId }) <br />
+            @Html.ActionLink("Детали", "Details", new { id=item.ConsultantId }) <br />
             @Html.ActionLink("Удалить", "Delete", new { id=item.ConsultantId })
         </td>
     </tr>

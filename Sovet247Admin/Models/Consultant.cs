@@ -21,10 +21,13 @@ using System.ComponentModel;
         }
     
         public int ConsultantId { get; set; }
+        [DisplayName("Профессия")]
         public int ProfessionId { get; set; }
+        [DisplayName("Специальность")]
         public Nullable<int> SpecialtyId { get; set; }
         [DisplayName("Специализация")]
         public string specialization { get; set; }
+        [DisplayName("Пользователь")]
         public int UserId { get; set; }
         [DisplayName("Образование")]
         public string education { get; set; }
