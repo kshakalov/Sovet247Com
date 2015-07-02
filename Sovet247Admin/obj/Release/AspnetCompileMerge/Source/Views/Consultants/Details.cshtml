@@ -1,0 +1,94 @@
+﻿@model Sovet247Admin.Models.Consultant
+
+@{
+    ViewBag.Title = "Данные эксперта";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Html.DisplayFor(model => model.User.firstname) @Html.DisplayFor(model => model.User.lastname)</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <img src="@Html.DisplayFor(model => model.photo_url)" alt="@Html.DisplayFor(model=>model.User.firstname) @Html.DisplayFor(model=>model.User.lastname)" width="150px;" />
+        </dt>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.nickname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.nickname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Profession.Profession_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Profession.Profession_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Specialty.Specialty_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Specialty.Specialty_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.specialization)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.specialization)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.education)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.education)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.workplace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.workplace)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.short_resume)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.short_resume)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.comission_percent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comission_percent)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить", "Edit", new { id = Model.ConsultantId }) |
+    @Html.ActionLink("Вернуться к списку", "Index")
+</p>

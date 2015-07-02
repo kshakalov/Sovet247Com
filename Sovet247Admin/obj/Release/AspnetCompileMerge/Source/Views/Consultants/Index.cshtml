@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Sovet247Admin.Models.Consultant>
+
+@{
+    ViewBag.Title = "Список экспертов";    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список экспертов</h2>
+
+<div>
+    @using(Html.BeginForm())
+    {
+        <p>Найти по имени: @Html.TextBox("searchConsultantName") <input type="submit" value="Найти" /></p>
+    }
+
+</div>
+
+<p>
+    @Html.ActionLink("Добавить эксперта", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.photo_url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Profession.Profession_Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Specialty.Specialty_title)
+        </th>
+       <th>
+            @Html.DisplayNameFor(model => model.specialization)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.active)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comission_percent)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="@item.photo_url" alt="@item.User.firstname @item.User.lastname" style="width:70px;" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.firstname) @Html.DisplayFor(modelItem=>item.User.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profession.Profession_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Specialty.Specialty_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.specialization)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.active)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comission_percent)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.ConsultantId }) <br />
+            @Html.ActionLink("Детали", "Details", new { id=item.ConsultantId }) <br />
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ConsultantId })
+        </td>
+    </tr>
+}
+
+</table>

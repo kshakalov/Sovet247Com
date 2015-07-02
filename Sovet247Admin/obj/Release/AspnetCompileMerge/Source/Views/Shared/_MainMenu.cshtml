@@ -1,0 +1,65 @@
+﻿@using Sovet247Admin.Models;
+@{ConsultationsDbContext _context=new ConsultationsDbContext();
+  List<Menu> menuList = null;
+  if(User.Identity.IsAuthenticated)
+  { 
+  var roleId=_context.Users.FirstOrDefault(u=>u.email==User.Identity.Name).RoleId;
+  menuList = _context.Menus.Where(m=>m.roles.Contains(roleId.ToString())).ToList();    
+  }
+}
+@{
+    Layout = null;
+}
+
+<ul class="menu">
+
+    @if(menuList!=null)
+    { 
+        
+        foreach (var mp in menuList.Where(p => p.parent_id == null))
+    {
+
+        <li>
+            @Html.ActionLink(mp.title, "Index", mp.url)
+            @if (menuList.Count(p => p.parent_id == mp.MenuId) > 0)
+            {
+                @:<ul>
+            }
+
+            @RenderMenuItem(menuList, mp)
+
+            @if (menuList.Count(p => p.parent_id == mp.MenuId) > 0)
+            {
+                @:</ul>
+            }
+
+        </li>
+    }
+    }   
+</ul>
+
+
+@helper RenderMenuItem(List<Sovet247Admin.Models.Menu> menuList, Sovet247Admin.Models.Menu mi)
+{
+    foreach (var cp in menuList.Where(p => p.parent_id == mi.MenuId))
+    {
+        @:<li>
+        @Html.ActionLink(cp.title, "Index", cp.url)
+
+        if (menuList.Count(p => p.parent_id == cp.MenuId) > 0)
+        {
+            @:<ul>
+        }
+
+        @RenderMenuItem(menuList, cp)
+
+        if (menuList.Count(p => p.parent_id == cp.MenuId) > 0)
+        {
+            @:</ul>
+        }
+        else
+        {
+            @:</li>
+        }
+    }
+}

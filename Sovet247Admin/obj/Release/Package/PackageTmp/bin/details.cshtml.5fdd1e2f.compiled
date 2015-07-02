@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="2" virtualPath="/Views/AdminMessages/Details.cshtml" hash="5b860261" filehash="ffffedb0c81cb5f7" flags="110000" assembly="App_Web_details.cshtml.5fdd1e2f" type="ASP._Page_Views_AdminMessages_Details_cshtml">
+    <filedeps>
+        <filedep name="/Views/AdminMessages/Details.cshtml" />
+    </filedeps>
+</preserve>

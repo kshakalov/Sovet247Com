@@ -1,0 +1,67 @@
+﻿@model Sovet247Admin.Models.AdminMessage
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AdminMessage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.fromUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fromUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.toUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.toUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.subject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.message)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminMessage1.subject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminMessage1.subject)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.adminMessageId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
