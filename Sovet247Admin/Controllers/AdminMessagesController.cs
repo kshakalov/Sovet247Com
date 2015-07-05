@@ -8,9 +8,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Sovet247Admin.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Sovet247Admin.Controllers
 {
+    [Authorize(Roles = "Администратор")]
     public class AdminMessagesController : Controller
     {
         private ConsultationsDbContext db = new ConsultationsDbContext();
@@ -18,7 +20,8 @@ namespace Sovet247Admin.Controllers
         // GET: AdminMessages
         public async Task<ActionResult> Index()
         {
-            var adminMessages = db.AdminMessages.Include(a => a.AdminMessage1);
+            var userId = User.Identity.GetUserId<int>();
+            var adminMessages = db.AdminMessages.Where(am=>am.toUserId==0 || am.fromUserId==userId || am.toUserId==userId).Include(a => a.AdminMessage1);
             return View(await adminMessages.ToListAsync());
         }
 
