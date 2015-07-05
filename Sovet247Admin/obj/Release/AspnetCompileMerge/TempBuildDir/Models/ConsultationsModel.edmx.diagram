@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d9ef3ab456eb4f78a929926c463dcddd" Name="Diagram1">
+        <EntityTypeShape EntityType="ConsultationsModel.AdminMessage" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Consultant" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Consultation_Statuses" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Consultation_Time" Width="1.5" PointX="7.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Consultation_Types" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Consultation" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Country" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Menu" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Message" Width="1.5" PointX="10.5" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Profession" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Role" Width="1.5" PointX="1.5" PointY="19.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Specialty" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.Transaction" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ConsultationsModel.User" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="ConsultationsModel.FK_AdminMessages_AdminMessages" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultants_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultations_Consultants" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultations_Consultation_Statuses" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultation_Time_Consultations" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultations_Consultation_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultations_Professions" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultations_Specialties" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Messages_Consultations" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Transactions_Consultations" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Users_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Menu_Menu" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Messages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Specialties_Professions" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Transactions_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultants_Professions" />
+        <AssociationConnector Association="ConsultationsModel.FK_Consultants_Specialties" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

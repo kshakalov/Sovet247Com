@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Sovet247Admin.Models.AdminMessage>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fromUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.toUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.subject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.message)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateCreated)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdminMessage1.subject)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fromUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.toUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.subject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.message)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdminMessage1.subject)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.adminMessageId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.adminMessageId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.adminMessageId })
+        </td>
+    </tr>
+}
+
+</table>

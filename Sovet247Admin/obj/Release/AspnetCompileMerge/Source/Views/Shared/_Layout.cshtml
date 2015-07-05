@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Совет 24/7 - консультации специалистов онлайн.</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="logo">
+                    <img src="/images/logo.png"
+                         alt="Совет 24/7 - консультации специалистов онлайн."
+                         style="margin-left: 10px; margin-top: 5px;" /><br />
+                </div>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@*Html.ActionLink("Справочники", "Index", "Dictionaries")*@</li>
+                    <li>@*@Html.ActionLink("About", "About", "Home")*@</li>
+                    <li>@*@Html.ActionLink("Contact", "Contact", "Home")*@</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="navbar-left" style="float:left;margin-top:90px;width:20%;">
+            @Html.Partial("_MainMenu")
+        </div>
+        <div style="float:left;margin-left:20px; min-width:400px;max-width:78%;">
+            @RenderBody()
+        </div>
+        <hr />
+        <div style="clear:both;">
+            <footer style="text-align:center;">
+                <p>&copy; @DateTime.Now.Year - Совет 24/7 - консультации специалистов онлайн.</p>
+            </footer>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Sovet247Admin.Models.Profession>
+
+@{
+    ViewBag.Title = "Профессии";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Профессии</h2>
+
+<p>
+    @Html.ActionLink("Добавить профессию", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Профессия
+        </th>
+        <th>
+            Активна
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Profession_Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Active)
+        </td>
+        <td>
+            @Html.ActionLink("Изменить", "Edit", new { id=item.ProfessionId }) |
+            @Html.ActionLink("Подробнее", "Details", new { id=item.ProfessionId }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.ProfessionId })
+        </td>
+    </tr>
+}
+
+</table>

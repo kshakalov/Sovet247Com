@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ConsultationsModelStoreContainer" CdmEntityContainer="ConsultationsDbContext">
+    <EntitySetMapping Name="AdminMessages">
+      <EntityTypeMapping TypeName="ConsultationsModel.AdminMessage">
+        <MappingFragment StoreEntitySet="AdminMessages">
+          <ScalarProperty Name="adminMessageId" ColumnName="adminMessageId" />
+          <ScalarProperty Name="parentMessageId" ColumnName="parentMessageId" />
+          <ScalarProperty Name="fromUserId" ColumnName="fromUserId" />
+          <ScalarProperty Name="toUserId" ColumnName="toUserId" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultants">
+      <EntityTypeMapping TypeName="ConsultationsModel.Consultant">
+        <MappingFragment StoreEntitySet="Consultants">
+          <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+          <ScalarProperty Name="ProfessionId" ColumnName="ProfessionId" />
+          <ScalarProperty Name="SpecialtyId" ColumnName="SpecialtyId" />
+          <ScalarProperty Name="specialization" ColumnName="specialization" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="education" ColumnName="education" />
+          <ScalarProperty Name="workplace" ColumnName="workplace" />
+          <ScalarProperty Name="active" ColumnName="active" />
+          <ScalarProperty Name="short_resume" ColumnName="short_resume" />
+          <ScalarProperty Name="comission_percent" ColumnName="comission_percent" />
+          <ScalarProperty Name="photo_url" ColumnName="photo_url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultation_Statuses">
+      <EntityTypeMapping TypeName="ConsultationsModel.Consultation_Statuses">
+        <MappingFragment StoreEntitySet="Consultation_Statuses">
+          <ScalarProperty Name="ConsultationStatusId" ColumnName="ConsultationStatusId" />
+          <ScalarProperty Name="status_title" ColumnName="status_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultation_Time">
+      <EntityTypeMapping TypeName="ConsultationsModel.Consultation_Time">
+        <MappingFragment StoreEntitySet="Consultation_Time">
+          <ScalarProperty Name="consultationTimeId" ColumnName="consultationTimeId" />
+          <ScalarProperty Name="ConsultationId" ColumnName="ConsultationId" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="skypeContact" ColumnName="skypeContact" />
+          <ScalarProperty Name="phoneContact" ColumnName="phoneContact" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultation_Types">
+      <EntityTypeMapping TypeName="ConsultationsModel.Consultation_Types">
+        <MappingFragment StoreEntitySet="Consultation_Types">
+          <ScalarProperty Name="ConsultationTypeId" ColumnName="ConsultationTypeId" />
+          <ScalarProperty Name="consultation_type" ColumnName="consultation_type" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultations">
+      <EntityTypeMapping TypeName="ConsultationsModel.Consultation">
+        <MappingFragment StoreEntitySet="Consultations">
+          <ScalarProperty Name="ConsultationId" ColumnName="ConsultationId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="consultation_type" ColumnName="consultation_type" />
+          <ScalarProperty Name="ProfessionId" ColumnName="ProfessionId" />
+          <ScalarProperty Name="SpecialtyId" ColumnName="SpecialtyId" />
+          <ScalarProperty Name="consultation_status" ColumnName="consultation_status" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="update_date" ColumnName="update_date" />
+          <ScalarProperty Name="customer_rating" ColumnName="customer_rating" />
+          <ScalarProperty Name="customer_comments" ColumnName="customer_comments" />
+          <ScalarProperty Name="consultation_price" ColumnName="consultation_price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="ConsultationsModel.Country">
+        <MappingFragment StoreEntitySet="Countries">
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="country_code" ColumnName="country_code" />
+          <ScalarProperty Name="country_name" ColumnName="country_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Menus">
+      <EntityTypeMapping TypeName="ConsultationsModel.Menu">
+        <MappingFragment StoreEntitySet="Menu">
+          <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="roles" ColumnName="roles" />
+          <ScalarProperty Name="parent_id" ColumnName="parent_id" />
+          <ScalarProperty Name="sort_order" ColumnName="sort_order" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Messages">
+      <EntityTypeMapping TypeName="ConsultationsModel.Message">
+        <MappingFragment StoreEntitySet="Messages">
+          <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+          <ScalarProperty Name="ConsultationId" ColumnName="ConsultationId" />
+          <ScalarProperty Name="message1" ColumnName="message" />
+          <ScalarProperty Name="added_date" ColumnName="added_date" />
+          <ScalarProperty Name="attachment" ColumnName="attachment" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="published" ColumnName="published" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Professions">
+      <EntityTypeMapping TypeName="ConsultationsModel.Profession">
+        <MappingFragment StoreEntitySet="Professions">
+          <ScalarProperty Name="ProfessionId" ColumnName="ProfessionId" />
+          <ScalarProperty Name="Profession_Title" ColumnName="Profession_Title" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="ConsultationsModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="role_title" ColumnName="role_title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Specialties">
+      <EntityTypeMapping TypeName="ConsultationsModel.Specialty">
+        <MappingFragment StoreEntitySet="Specialties">
+          <ScalarProperty Name="SpecialtyId" ColumnName="SpecialtyId" />
+          <ScalarProperty Name="Specialty_title" ColumnName="Specialty_title" />
+          <ScalarProperty Name="ProfessionId" ColumnName="ProfessionId" />
+          <ScalarProperty Name="active" ColumnName="active" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ConsultationsModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="ConsultationsModel.Transaction">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+          <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="ConsultationId" ColumnName="ConsultationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="ConsultationsModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="middlename" ColumnName="middlename" />
+          <ScalarProperty Name="street_address" ColumnName="street_address" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="zip" ColumnName="zip" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="wants_newsletter" ColumnName="wants_newsletter" />
+          <ScalarProperty Name="alternate_contacts" ColumnName="alternate_contacts" />
+          <ScalarProperty Name="comments" ColumnName="comments" />
+          <ScalarProperty Name="can_publish_questions" ColumnName="can_publish_questions" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
