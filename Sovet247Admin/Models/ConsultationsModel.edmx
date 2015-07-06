@@ -16,6 +16,7 @@
           <Property Name="subject" Type="nvarchar" MaxLength="500" />
           <Property Name="message" Type="nvarchar(max)" />
           <Property Name="dateCreated" Type="datetime" Nullable="false" />
+          <Property Name="IsHasRead" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Consultants">
           <Key>
@@ -185,6 +186,30 @@
             </Principal>
             <Dependent Role="AdminMessages1">
               <PropertyRef Name="parentMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminMessages_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AdminMessages">
+              <PropertyRef Name="fromUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminMessages_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AdminMessages">
+              <PropertyRef Name="toUserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -415,6 +440,14 @@
             <End Role="AdminMessages" EntitySet="AdminMessages" />
             <End Role="AdminMessages1" EntitySet="AdminMessages" />
           </AssociationSet>
+          <AssociationSet Name="FK_AdminMessages_Users" Association="Self.FK_AdminMessages_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AdminMessages" EntitySet="AdminMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminMessages_Users1" Association="Self.FK_AdminMessages_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AdminMessages" EntitySet="AdminMessages" />
+          </AssociationSet>
           <AssociationSet Name="FK_Consultants_Professions" Association="Self.FK_Consultants_Professions">
             <End Role="Professions" EntitySet="Professions" />
             <End Role="Consultants" EntitySet="Consultants" />
@@ -501,6 +534,9 @@
           <Property Name="dateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="AdminMessages1" Relationship="Self.FK_AdminMessages_AdminMessages" FromRole="AdminMessages" ToRole="AdminMessages1" />
           <NavigationProperty Name="AdminMessage1" Relationship="Self.FK_AdminMessages_AdminMessages" FromRole="AdminMessages1" ToRole="AdminMessages" />
+          <Property Name="IsHasRead" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FromUser" Relationship="ConsultationsModel.FK_AdminMessages_Users" FromRole="AdminMessage" ToRole="User" />
+          <NavigationProperty Name="ToUser" Relationship="ConsultationsModel.FK_AdminMessages_Users1" FromRole="AdminMessage" ToRole="User" />
         </EntityType>
         <EntityType Name="Consultant">
           <Key>
@@ -694,6 +730,8 @@
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Users" FromRole="Users" ToRole="Messages" />
           <NavigationProperty Name="Role" Relationship="Self.FK_Users_Roles" FromRole="Users" ToRole="Roles" />
           <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_Users" FromRole="Users" ToRole="Transactions" />
+          <NavigationProperty Name="AdminMessages" Relationship="ConsultationsModel.FK_AdminMessages_Users" FromRole="User" ToRole="AdminMessage" />
+          <NavigationProperty Name="AdminMessages1" Relationship="ConsultationsModel.FK_AdminMessages_Users1" FromRole="User" ToRole="AdminMessage" />
         </EntityType>
         <Association Name="FK_AdminMessages_AdminMessages">
           <End Role="AdminMessages" Type="Self.AdminMessage" Multiplicity="1" />
@@ -975,6 +1013,14 @@
             <End Role="Specialty" EntitySet="Specialties" />
             <End Role="Consultant" EntitySet="Consultants" />
           </AssociationSet>
+          <AssociationSet Name="FK_AdminMessages_Users" Association="ConsultationsModel.FK_AdminMessages_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AdminMessage" EntitySet="AdminMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminMessages_Users1" Association="ConsultationsModel.FK_AdminMessages_Users1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AdminMessage" EntitySet="AdminMessages" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Consultants_Professions">
           <End Type="ConsultationsModel.Profession" Role="Profession" Multiplicity="1" />
@@ -1000,6 +1046,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_AdminMessages_Users">
+          <End Type="ConsultationsModel.User" Role="User" Multiplicity="1" />
+          <End Type="ConsultationsModel.AdminMessage" Role="AdminMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AdminMessage">
+              <PropertyRef Name="fromUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminMessages_Users1">
+          <End Type="ConsultationsModel.User" Role="User" Multiplicity="1" />
+          <End Type="ConsultationsModel.AdminMessage" Role="AdminMessage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="AdminMessage">
+              <PropertyRef Name="toUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1009,6 +1079,7 @@
           <EntitySetMapping Name="AdminMessages">
             <EntityTypeMapping TypeName="ConsultationsModel.AdminMessage">
               <MappingFragment StoreEntitySet="AdminMessages">
+                <ScalarProperty Name="IsHasRead" ColumnName="IsHasRead" />
                 <ScalarProperty Name="adminMessageId" ColumnName="adminMessageId" />
                 <ScalarProperty Name="parentMessageId" ColumnName="parentMessageId" />
                 <ScalarProperty Name="fromUserId" ColumnName="fromUserId" />

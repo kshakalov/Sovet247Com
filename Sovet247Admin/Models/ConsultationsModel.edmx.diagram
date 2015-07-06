@@ -38,6 +38,8 @@
         <AssociationConnector Association="ConsultationsModel.FK_Transactions_Users" ManuallyRouted="false" />
         <AssociationConnector Association="ConsultationsModel.FK_Consultants_Professions" />
         <AssociationConnector Association="ConsultationsModel.FK_Consultants_Specialties" />
+        <AssociationConnector Association="ConsultationsModel.FK_AdminMessages_Users" />
+        <AssociationConnector Association="ConsultationsModel.FK_AdminMessages_Users1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

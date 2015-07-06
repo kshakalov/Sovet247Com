@@ -11,6 +11,7 @@ namespace Sovet247Admin.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
     public partial class AdminMessage
     {
@@ -21,13 +22,21 @@ namespace Sovet247Admin.Models
     
         public int adminMessageId { get; set; }
         public int parentMessageId { get; set; }
+        [DisplayName("Отправитель")]
         public int fromUserId { get; set; }
+        [DisplayName("Получатель")]
         public int toUserId { get; set; }
+        [DisplayName("Тема сообщения")]
         public string subject { get; set; }
+        [DisplayName("Текст сообщения")]
         public string message { get; set; }
+        [DisplayName("Дата")]
         public System.DateTime dateCreated { get; set; }
+        public bool IsHasRead { get; set; }
     
         public virtual ICollection<AdminMessage> AdminMessages1 { get; set; }
         public virtual AdminMessage AdminMessage1 { get; set; }
+        public virtual User FromUser { get; set; }
+        public virtual User ToUser { get; set; }
     }
 }

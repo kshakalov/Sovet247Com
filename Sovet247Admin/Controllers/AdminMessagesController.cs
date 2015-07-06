@@ -21,7 +21,8 @@ namespace Sovet247Admin.Controllers
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId<int>();
-            var adminMessages = db.AdminMessages.Where(am=>am.toUserId==0 || am.fromUserId==userId || am.toUserId==userId).Include(a => a.AdminMessage1);
+            var adminMessages = db.AdminMessages.Where(am=>(am.parentMessageId==0) && (am.toUserId==0 || am.fromUserId==userId || am.toUserId==userId)).Include(a=>a.AdminMessages1).DefaultIfEmpty()
+                .Include(u=>u.FromUser).Include(u2=>u2.ToUser);
             return View(await adminMessages.ToListAsync());
         }
 

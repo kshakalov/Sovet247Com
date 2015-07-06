@@ -4,6 +4,7 @@
     <EntitySetMapping Name="AdminMessages">
       <EntityTypeMapping TypeName="ConsultationsModel.AdminMessage">
         <MappingFragment StoreEntitySet="AdminMessages">
+          <ScalarProperty Name="IsHasRead" ColumnName="IsHasRead" />
           <ScalarProperty Name="adminMessageId" ColumnName="adminMessageId" />
           <ScalarProperty Name="parentMessageId" ColumnName="parentMessageId" />
           <ScalarProperty Name="fromUserId" ColumnName="fromUserId" />

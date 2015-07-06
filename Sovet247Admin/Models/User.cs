@@ -20,6 +20,8 @@ namespace Sovet247Admin.Models
             this.Consultants = new HashSet<Consultant>();
             this.Messages = new HashSet<Message>();
             this.Transactions = new HashSet<Transaction>();
+            this.AdminMessages = new HashSet<AdminMessage>();
+            this.AdminMessages1 = new HashSet<AdminMessage>();
         }
     
         public int UserId { get; set; }
@@ -61,5 +63,7 @@ namespace Sovet247Admin.Models
         public virtual ICollection<Message> Messages { get; set; }
         public virtual Role Role { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<AdminMessage> AdminMessages { get; set; }
+        public virtual ICollection<AdminMessage> AdminMessages1 { get; set; }
     }
 }
