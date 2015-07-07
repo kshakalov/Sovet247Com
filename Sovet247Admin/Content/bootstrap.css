@@ -617,9 +617,11 @@ dd {
     text-align: right;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-top:10px;
   }
   .dl-horizontal dd {
     margin-left: 180px;
+    margin-top:10px;
   }
   .dl-horizontal dd:before,
   .dl-horizontal dd:after {

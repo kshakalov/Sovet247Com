@@ -27,8 +27,6 @@
         <th>
             @Html.DisplayNameFor(model => model.dateCreated)
         </th>
-        
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
@@ -40,17 +38,13 @@
             @Html.DisplayFor(modelItem => item.ToUser.firstname) @Html.DisplayFor(modelItem => item.ToUser.lastname)
         </td>
         <td class="messagefield">
-            @Html.DisplayFor(modelItem => item.subject)
+            @Html.ActionLink(item.subject, "Details", new { id = item.adminMessageId })
         </td>
-        <td>
+        <td class="messagefield">
             @Html.DisplayFor(modelItem => item.message)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.dateCreated)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.adminMessageId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.adminMessageId })
         </td>
     </tr>
 }
