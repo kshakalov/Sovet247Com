@@ -15,11 +15,6 @@ namespace Sovet247Admin.Models
     
     public partial class AdminMessage
     {
-        public AdminMessage()
-        {
-            this.AdminMessages1 = new HashSet<AdminMessage>();
-        }
-    
         public int adminMessageId { get; set; }
         public int parentMessageId { get; set; }
         [DisplayName("Отправитель")]
@@ -34,8 +29,6 @@ namespace Sovet247Admin.Models
         public System.DateTime dateCreated { get; set; }
         public bool IsHasRead { get; set; }
     
-        public virtual ICollection<AdminMessage> AdminMessages1 { get; set; }
-        public virtual AdminMessage AdminMessage1 { get; set; }
         public virtual User FromUser { get; set; }
         public virtual User ToUser { get; set; }
     }

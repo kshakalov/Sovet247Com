@@ -1,7 +1,7 @@
 ﻿@model Sovet247Admin.Models.AdminMessage
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Просмотр сообщения";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -57,7 +57,8 @@
 
 <div><strong style="margin-top:10px;">Ответы</strong>
     <dl class="dl-horizontal">
-        @foreach (var item in Model.AdminMessages1)
+         
+        @foreach (var item in ViewBag.childMessages)
         {
             <hr  style="margin-top:5px; margin-bottom:15px;" />
             <dt>

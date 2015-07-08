@@ -1,7 +1,7 @@
 ﻿@model Sovet247Admin.Models.AdminMessage
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Новое сообщение";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,26 +15,12 @@
         <h4>AdminMessage</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.parentMessageId, "parentMessageId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("parentMessageId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.parentMessageId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.fromUserId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.fromUserId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.fromUserId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        @Html.Hidden("fromUserId", (int)ViewBag.fromUserId)
+        
         <div class="form-group">
             @Html.LabelFor(model => model.toUserId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.toUserId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownList("toUserId", (SelectList)ViewBag.ToUserIdSelectList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.toUserId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -50,22 +36,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.message, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.message, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.TextAreaFor(model => model.message, new { htmlAttributes = new { @class = "form-control", @rows="10", cols="30" } })
                 @Html.ValidationMessageFor(model => model.message, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.dateCreated, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.dateCreated, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.dateCreated, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+       
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Отправить" class="btn btn-default" />
             </div>
         </div>
     </div>

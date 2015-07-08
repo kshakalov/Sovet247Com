@@ -428,6 +428,7 @@
     <Content Include="Views\Consultants\Details.cshtml" />
     <Content Include="Views\Consultants\Edit.cshtml" />
     <Content Include="Views\Consultants\Index.cshtml" />
+    <Content Include="Views\AdminMessages\Answer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
