@@ -21,7 +21,7 @@ namespace Sovet247Admin.Controllers
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId<int>();
-            var adminMessages = db.AdminMessages.Where(am=>(am.parentMessageId==0) && (am.toUserId==0 || am.fromUserId==userId || am.toUserId==userId)).Include(u=>u.FromUser).Include(u2=>u2.ToUser);
+            var adminMessages = db.AdminMessages.Where(am=>(am.parentMessageId==0) && (am.toUserId==0 || am.fromUserId==userId || am.toUserId==userId)).Include(u=>u.FromUser).DefaultIfEmpty().Include(u2=>u2.ToUser).DefaultIfEmpty();
                         
             return View(await adminMessages.OrderByDescending(ord=>ord.dateCreated).ToListAsync());
         }
@@ -40,7 +40,7 @@ namespace Sovet247Admin.Controllers
             }
 
             var childMessages = db.AdminMessages.Where(wh => wh.parentMessageId == id);
-            ViewBag.childMessages = childMessages;
+            ViewBag.childMessages = childMessages.ToListAsync();
             return View(adminMessage);
         }
 
