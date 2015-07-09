@@ -39,8 +39,9 @@ namespace Sovet247Admin.Controllers
                 return HttpNotFound();
             }
 
-            var childMessages = db.AdminMessages.Where(wh => wh.parentMessageId == id);
-            ViewBag.childMessages = childMessages.ToListAsync();
+            var childMessages = db.AdminMessages.Where(wh => wh.parentMessageId == id).OrderByDescending(or=>or.dateCreated);
+            ViewBag.childMessages=childMessages.ToList<AdminMessage>();
+            //TempData.Keep();
             return View(adminMessage);
         }
 

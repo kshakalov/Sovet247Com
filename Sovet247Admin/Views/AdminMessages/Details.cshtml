@@ -1,9 +1,12 @@
-﻿@model Sovet247Admin.Models.AdminMessage
+﻿@using Sovet247Admin.Models;
+@model Sovet247Admin.Models.AdminMessage
 
 @{
     ViewBag.Title = "Просмотр сообщения";
+    var childMessages = ViewBag.childMessages;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 
 <h2>Просмотр сообщения</h2>
 
@@ -56,13 +59,12 @@
 </p>
 
 <div><strong style="margin-top:10px;">Ответы</strong>
-    <dl class="dl-horizontal">
-         
-        @foreach (var item in ViewBag.childMessages)
+    <dl class="dl-horizontal">         
+        @foreach (AdminMessage item in childMessages)
         {
             <hr  style="margin-top:5px; margin-bottom:15px;" />
             <dt>
-                @Html.DisplayName(item.fromUserId)
+                @Html.DisplayNameFor(it=>item.fromUserId)
             </dt>
 
             <dd>
@@ -92,7 +94,6 @@
             <dd>
                 @Html.DisplayFor(it => item.dateCreated)
             </dd>
-        }
         }
     </dl>
 </div>
