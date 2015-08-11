@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
-using Sovet247Admin.Models;
 using Microsoft.AspNet.Identity;
+using Sovet247Admin.Models;
 
 namespace Sovet247Admin.Controllers
 {
     [Authorize(Roles = "Администратор")]
     public class AdminMessagesController : Controller
     {
-        private ConsultationsDbContext db = new ConsultationsDbContext();
+        private readonly ConsultationsDbContext _db = new ConsultationsDbContext();
 
         // GET: AdminMessages
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId<int>();
-            var adminMessages = db.AdminMessages.Where(am=>(am.parentMessageId==0) && (am.toUserId==0 || am.fromUserId==userId || am.toUserId==userId)).Include(u=>u.FromUser).DefaultIfEmpty().Include(u2=>u2.ToUser).DefaultIfEmpty();
+            var adminMessages = _db.AdminMessages.Where(am=>(am.parentMessageId==0) && (am.toUserId==0 || am.fromUserId==userId || am.toUserId==userId)).Include(u=>u.FromUser).DefaultIfEmpty().Include(u2=>u2.ToUser).DefaultIfEmpty();
                         
             return View(await adminMessages.OrderByDescending(ord=>ord.dateCreated).ToListAsync());
         }
@@ -33,13 +30,13 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AdminMessage adminMessage = await db.AdminMessages.FindAsync(id);
+            AdminMessage adminMessage = await _db.AdminMessages.FindAsync(id);
             if (adminMessage == null)
             {
                 return HttpNotFound();
             }
 
-            var childMessages = db.AdminMessages.Where(wh => wh.parentMessageId == id).OrderByDescending(or=>or.dateCreated);
+            var childMessages = _db.AdminMessages.Where(wh => wh.parentMessageId == id).OrderByDescending(or=>or.dateCreated);
             ViewBag.childMessages=childMessages.ToList<AdminMessage>();
             //TempData.Keep();
             return View(adminMessage);
@@ -50,7 +47,7 @@ namespace Sovet247Admin.Controllers
         public ActionResult Answer(string parentMessageId)
         {
             var parentId=(!String.IsNullOrEmpty(Request["parentMessageId"]))?Int32.Parse(Request["parentMessageId"]):0;
-            var message = db.AdminMessages.Where(wh => wh.adminMessageId == parentId).FirstOrDefault();
+            var message = _db.AdminMessages.FirstOrDefault(wh => wh.adminMessageId == parentId);
             ViewBag.parentMessageId = parentId;
             ViewBag.fromUserId = User.Identity.GetUserId<int>();
             ViewBag.toUserId = message.fromUserId;
@@ -66,18 +63,18 @@ namespace Sovet247Admin.Controllers
             {
                 adminMessage.dateCreated = DateTime.Now;
                 adminMessage.IsHasRead = false;
-                db.AdminMessages.Add(adminMessage);
+                _db.AdminMessages.Add(adminMessage);
                 //await db.SaveChangesAsync();
                 
                 //Set status unread
-                var oldMessage = db.AdminMessages.Where(wh => wh.adminMessageId == adminMessage.parentMessageId).FirstOrDefault();
+                var oldMessage = _db.AdminMessages.FirstOrDefault(wh => wh.adminMessageId == adminMessage.parentMessageId);
                 oldMessage.IsHasRead = false;
-                await db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
             var parentId = adminMessage.parentMessageId;
-            var message = db.AdminMessages.Where(wh => wh.adminMessageId == parentId).FirstOrDefault();
+            var message = _db.AdminMessages.FirstOrDefault(wh => wh.adminMessageId == parentId);
             ViewBag.parentMessageId = parentId;
             ViewBag.fromUserId = User.Identity.GetUserId<int>();
             ViewBag.toUserId = message.fromUserId;
@@ -90,7 +87,7 @@ namespace Sovet247Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.fromUserId = User.Identity.GetUserId<int>();
-            ViewBag.ToUserIdSelectList = new SelectList(db.Users, "UserId", "email");
+            ViewBag.ToUserIdSelectList = new SelectList(_db.Users, "UserId", "email");
             return View();
         }
 
@@ -107,13 +104,13 @@ namespace Sovet247Admin.Controllers
                 adminMessage.dateCreated = DateTime.Now;
                 adminMessage.IsHasRead = false;
                 adminMessage.parentMessageId = 0;
-                db.AdminMessages.Add(adminMessage);
-                await db.SaveChangesAsync();
+                _db.AdminMessages.Add(adminMessage);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
             ViewBag.fromUserId = User.Identity.GetUserId<int>();
-            ViewBag.ToUserIdSelectList = new SelectList(db.Users, "UserId", "email");
+            ViewBag.ToUserIdSelectList = new SelectList(_db.Users, "UserId", "email");
             return View(adminMessage);
         }
 
@@ -122,7 +119,7 @@ namespace Sovet247Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

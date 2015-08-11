@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Sovet247Admin.Models;
 
@@ -14,12 +11,12 @@ namespace Sovet247Admin.Controllers
     [Authorize(Roles="Администратор")]
     public class ConsultantsController : Controller
     {
-        private ConsultationsDbContext db = new ConsultationsDbContext();
+        private readonly ConsultationsDbContext _db = new ConsultationsDbContext();
         
         // GET: Consultants
         public async Task<ActionResult> Index(string searchConsultantName)
         {
-            var consultants = db.Consultants.Include(c => c.User).Include(c => c.Profession).Include(c=>c.Specialty);
+            var consultants = _db.Consultants.Include(c => c.User).Include(c => c.Profession).Include(c=>c.Specialty);
             if(!String.IsNullOrEmpty(searchConsultantName))
             {
                 consultants = consultants.Where(c => c.User.firstname.Contains(searchConsultantName)
@@ -35,7 +32,7 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Consultant consultant = await db.Consultants.FindAsync(id);
+            Consultant consultant = await _db.Consultants.FindAsync(id);
             if (consultant == null)
             {
                 return HttpNotFound();
@@ -46,9 +43,9 @@ namespace Sovet247Admin.Controllers
         // GET: Consultants/Create
         public ActionResult Create()
         {
-            ViewBag.UserId = new SelectList(db.Users, "UserId", "nickname");
-            ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title");
-            ViewBag.SpecialtyId = new SelectList(db.Specialties, "SpecialtyId", "Specialty_Title");
+            ViewBag.UserId = new SelectList(_db.Users, "UserId", "nickname");
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title");
+            ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyId", "Specialty_Title");
             return View();
         }
 
@@ -61,14 +58,14 @@ namespace Sovet247Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Consultants.Add(consultant);
-                await db.SaveChangesAsync();
+                _db.Consultants.Add(consultant);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserId = new SelectList(db.Users, "UserId", "nickname", consultant.UserId);
-            ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
-            ViewBag.SpecialtyId = new SelectList(db.Specialties.Where(p => p.ProfessionId == consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
+            ViewBag.UserId = new SelectList(_db.Users, "UserId", "nickname", consultant.UserId);
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
+            ViewBag.SpecialtyId = new SelectList(_db.Specialties.Where(p => p.ProfessionId == consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
             return View(consultant);
         }
 
@@ -79,15 +76,15 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Consultant consultant = await db.Consultants.FindAsync(id);
+            Consultant consultant = await _db.Consultants.FindAsync(id);
             if (consultant == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(db.Users, "UserId", "lastname", consultant.UserId);
+            ViewBag.UserId = new SelectList(_db.Users, "UserId", "lastname", consultant.UserId);
             TempData["tmpProfessionId"]=consultant.ProfessionId;
-            ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
-            ViewBag.SpecialtyId = new SelectList(db.Specialties.Where(p=>p.ProfessionId==consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
+            ViewBag.SpecialtyId = new SelectList(_db.Specialties.Where(p=>p.ProfessionId==consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
             return View(consultant);
         }
 
@@ -100,13 +97,13 @@ namespace Sovet247Admin.Controllers
         {
             if (ModelState.IsValid && consultant.ProfessionId == (int?)TempData["tmpProfessionId"])
             {
-                db.Entry(consultant).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(consultant).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserId = new SelectList(db.Users, "UserId", "nickname", consultant.UserId);
-            ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
-            ViewBag.SpecialtyId = new SelectList(db.Specialties.Where(p => p.ProfessionId == consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
+            ViewBag.UserId = new SelectList(_db.Users, "UserId", "nickname", consultant.UserId);
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
+            ViewBag.SpecialtyId = new SelectList(_db.Specialties.Where(p => p.ProfessionId == consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
             TempData["tmpProfessionId"] = consultant.ProfessionId;
             return View(consultant);
         }
@@ -118,7 +115,7 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Consultant consultant = await db.Consultants.FindAsync(id);
+            Consultant consultant = await _db.Consultants.FindAsync(id);
             if (consultant == null)
             {
                 return HttpNotFound();
@@ -131,9 +128,9 @@ namespace Sovet247Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Consultant consultant = await db.Consultants.FindAsync(id);
-            db.Consultants.Remove(consultant);
-            await db.SaveChangesAsync();
+            Consultant consultant = await _db.Consultants.FindAsync(id);
+            _db.Consultants.Remove(consultant);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -141,7 +138,7 @@ namespace Sovet247Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

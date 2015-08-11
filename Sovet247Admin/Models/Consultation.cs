@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace Sovet247Admin.Models
 {
     using System;
@@ -22,17 +24,28 @@ namespace Sovet247Admin.Models
         }
     
         public int ConsultationId { get; set; }
+        [DisplayName("Клиент")]
         public int UserId { get; set; }
         public Nullable<int> ConsultantId { get; set; }
+        [DisplayName("Вопрос")]
         public string subject { get; set; }
+        [DisplayName("Тип консультации")]
         public int consultation_type { get; set; }
+        [DisplayName("Профессия")]
         public int ProfessionId { get; set; }
+        [DisplayName("Специальность")]
         public Nullable<int> SpecialtyId { get; set; }
+        [DisplayName("Статус")]
         public int consultation_status { get; set; }
+        [DisplayName("Дата")]
         public System.DateTime create_date { get; set; }
+        [DisplayName("Дата обновления")]
         public System.DateTime update_date { get; set; }
+        [DisplayName("Рейтинг")]
         public Nullable<decimal> customer_rating { get; set; }
+        [DisplayName("Комментарий")]
         public string customer_comments { get; set; }
+        [DisplayName("Стоимость вопроса")]
         public decimal consultation_price { get; set; }
     
         public virtual Consultant Consultant { get; set; }
@@ -43,5 +56,6 @@ namespace Sovet247Admin.Models
         public virtual Specialty Specialty { get; set; }
         public virtual ICollection<Message> Messages { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
+        public virtual User User { get; set; }
     }
 }

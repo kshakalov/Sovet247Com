@@ -75,3 +75,7 @@ D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\System.Web.WebPages.Razor.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\System.Xml.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\System.Xml.Linq.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\WebGrease.dll
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.dll
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.Mvc.dll
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.xml
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.Mvc.xml

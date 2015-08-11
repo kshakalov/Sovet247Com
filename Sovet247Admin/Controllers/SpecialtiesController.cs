@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Sovet247Admin.Models;
 
@@ -14,12 +9,12 @@ namespace Sovet247Admin.Controllers
     [Authorize(Roles = "Администратор")]
     public class SpecialtiesController : Controller
     {
-        private ConsultationsDbContext db = new ConsultationsDbContext();
+        private readonly ConsultationsDbContext _db = new ConsultationsDbContext();
 
         // GET: Specialties
         public async Task<ActionResult> Index()
         {
-            var specialties = db.Specialties.Include(s => s.Profession);
+            var specialties = _db.Specialties.Include(s => s.Profession);
             return View(await specialties.ToListAsync());
         }
 
@@ -30,7 +25,7 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Specialty specialty = await db.Specialties.FindAsync(id);
+            Specialty specialty = await _db.Specialties.FindAsync(id);
             if (specialty == null)
             {
                 return HttpNotFound();
@@ -41,7 +36,7 @@ namespace Sovet247Admin.Controllers
         // GET: Specialties/Create
         public ActionResult Create()
         {
-            ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title");
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title");
             return View();
         }
 
@@ -54,12 +49,12 @@ namespace Sovet247Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Specialties.Add(specialty);
-                await db.SaveChangesAsync();
+                _db.Specialties.Add(specialty);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", specialty.ProfessionId);
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", specialty.ProfessionId);
             return View(specialty);
         }
 
@@ -70,12 +65,12 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Specialty specialty = await db.Specialties.FindAsync(id);
+            Specialty specialty = await _db.Specialties.FindAsync(id);
             if (specialty == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", specialty.ProfessionId);
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", specialty.ProfessionId);
             return View(specialty);
         }
 
@@ -88,11 +83,11 @@ namespace Sovet247Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(specialty).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(specialty).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.ProfessionId = new SelectList(db.Professions, "ProfessionId", "Profession_Title", specialty.ProfessionId);
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", specialty.ProfessionId);
             return View(specialty);
         }
 
@@ -103,7 +98,7 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Specialty specialty = await db.Specialties.FindAsync(id);
+            Specialty specialty = await _db.Specialties.FindAsync(id);
             if (specialty == null)
             {
                 return HttpNotFound();
@@ -116,9 +111,9 @@ namespace Sovet247Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Specialty specialty = await db.Specialties.FindAsync(id);
-            db.Specialties.Remove(specialty);
-            await db.SaveChangesAsync();
+            Specialty specialty = await _db.Specialties.FindAsync(id);
+            _db.Specialties.Remove(specialty);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -126,7 +121,7 @@ namespace Sovet247Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

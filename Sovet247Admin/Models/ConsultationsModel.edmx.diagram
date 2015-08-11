@@ -39,6 +39,7 @@
         <AssociationConnector Association="ConsultationsModel.FK_Consultants_Specialties" />
         <AssociationConnector Association="ConsultationsModel.FK_AdminMessages_Users" />
         <AssociationConnector Association="ConsultationsModel.FK_AdminMessages_Users1" />
+        <AssociationConnector Association="ConsultationsModel.ConsultationUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

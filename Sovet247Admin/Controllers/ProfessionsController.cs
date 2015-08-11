@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Sovet247Admin.Models;
 
@@ -15,12 +10,12 @@ namespace Sovet247Admin.Views
     public class ProfessionsController : Controller
     {
         
-        private ConsultationsDbContext db = new ConsultationsDbContext();
+        private readonly ConsultationsDbContext _db = new ConsultationsDbContext();
 
         // GET: Professions
         public async Task<ActionResult> Index()
         {
-            return View(await db.Professions.ToListAsync());
+            return View(await _db.Professions.ToListAsync());
         }
 
         // GET: Professions/Details/5
@@ -30,7 +25,7 @@ namespace Sovet247Admin.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profession profession = await db.Professions.FindAsync(id);
+            Profession profession = await _db.Professions.FindAsync(id);
             if (profession == null)
             {
                 return HttpNotFound();
@@ -53,8 +48,8 @@ namespace Sovet247Admin.Views
         {
             if (ModelState.IsValid)
             {
-                db.Professions.Add(profession);
-                await db.SaveChangesAsync();
+                _db.Professions.Add(profession);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -68,7 +63,7 @@ namespace Sovet247Admin.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profession profession = await db.Professions.FindAsync(id);
+            Profession profession = await _db.Professions.FindAsync(id);
             if (profession == null)
             {
                 return HttpNotFound();
@@ -85,8 +80,8 @@ namespace Sovet247Admin.Views
         {
             if (ModelState.IsValid)
             {
-                db.Entry(profession).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(profession).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(profession);
@@ -99,7 +94,7 @@ namespace Sovet247Admin.Views
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profession profession = await db.Professions.FindAsync(id);
+            Profession profession = await _db.Professions.FindAsync(id);
             if (profession == null)
             {
                 return HttpNotFound();
@@ -112,9 +107,9 @@ namespace Sovet247Admin.Views
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Profession profession = await db.Professions.FindAsync(id);
-            db.Professions.Remove(profession);
-            await db.SaveChangesAsync();
+            Profession profession = await _db.Professions.FindAsync(id);
+            _db.Professions.Remove(profession);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -122,7 +117,7 @@ namespace Sovet247Admin.Views
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

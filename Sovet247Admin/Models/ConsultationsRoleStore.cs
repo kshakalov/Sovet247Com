@@ -1,16 +1,14 @@
-﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Sovet247Admin.Models
 {
     public class ConsultationsRoleStore : RoleStore<ConsultationsRole, int, ConsultationsUserRole>, IRoleStore<ConsultationsRole, int>
     {
-        ConsultationsIdentityDbContext _context;
+        readonly ConsultationsIdentityDbContext _context;
         public ConsultationsRoleStore(ConsultationsIdentityDbContext context)
             : base(context)
         {
@@ -19,32 +17,32 @@ namespace Sovet247Admin.Models
 
         Task IRoleStore<ConsultationsRole, int>.CreateAsync(ConsultationsRole role)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         Task IRoleStore<ConsultationsRole, int>.DeleteAsync(ConsultationsRole role)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         Task<ConsultationsRole> IRoleStore<ConsultationsRole, int>.FindByIdAsync(int roleId)
         {
-            Task<ConsultationsRole> task = Task.FromResult<ConsultationsRole>(_context.Roles.Where(r => r.RoleDetails.RoleId == roleId).FirstOrDefault());
+            Task<ConsultationsRole> task = Task.FromResult<ConsultationsRole>(_context.Roles.FirstOrDefault(r => r.RoleDetails.RoleId == roleId));
             return task;
         }
 
         Task<ConsultationsRole> IRoleStore<ConsultationsRole, int>.FindByNameAsync(string roleName)
         {
-            Task<ConsultationsRole> task = Task.FromResult<ConsultationsRole>(_context.Roles.Where(r => r.RoleDetails.role_title == roleName).FirstOrDefault());
+            Task<ConsultationsRole> task = Task.FromResult<ConsultationsRole>(_context.Roles.FirstOrDefault(r => r.RoleDetails.role_title == roleName));
             return task;
         }
 
         Task IRoleStore<ConsultationsRole, int>.UpdateAsync(ConsultationsRole role)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        void System.IDisposable.Dispose()
+        void IDisposable.Dispose()
         {
             _context.Dispose();
         }

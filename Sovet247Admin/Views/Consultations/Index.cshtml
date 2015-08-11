@@ -1,0 +1,102 @@
+﻿@model PagedList.IPagedList<Sovet247Admin.Models.Consultation>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "Список консультаций";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список консультаций</h2>
+
+
+<table class="table">
+     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().UserId)
+        </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().subject)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Consultation_Types.consultation_type)
+         </th>
+        <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Consultation_Statuses.status_title)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().create_date)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().consultation_price)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Profession.Profession_Title)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Specialty.Specialty_title)
+         </th>
+       <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().customer_rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().customer_comments)
+        </th>
+
+
+      
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.firstname) @Html.DisplayFor(modelItem=>item.User.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultation_Types.consultation_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultation_Statuses.status_title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.create_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.consultation_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profession.Profession_Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specialty.Specialty_title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_comments)
+            </td>
+           
+           
+
+
+           
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.ConsultationId}) |
+                @Html.ActionLink("Details", "Details", new {id = item.ConsultationId}) |
+                @Html.ActionLink("Delete", "Delete", new {id = item.ConsultationId})
+            </td>
+        </tr>
+    }
+
+</table>
+<br/>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page }))
+

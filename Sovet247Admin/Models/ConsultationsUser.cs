@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Sovet247Admin.Models
 {
     public class ConsultationsUser : IdentityUser<int, ConsultationsUserLogin, ConsultationsUserRole, ConsultationsUserClaim>, IUser<int>
     {
         public User UserDetails;
-        private ConsultationsDbContext context;
+        private readonly ConsultationsDbContext _context;
         public ConsultationsUser()
         {
-            context = new ConsultationsDbContext();
+            _context = new ConsultationsDbContext();
         }
 
         public ConsultationsUser(string email):this()
         {
-            UserDetails = context.Users.Where(u => u.email == email).FirstOrDefault();
+            UserDetails = _context.Users.FirstOrDefault(u => u.email == email);
             if (UserDetails!=null)
             {
                 Id = UserDetails.UserId;
@@ -30,12 +27,10 @@ namespace Sovet247Admin.Models
 
         public ConsultationsUser(int userId):this()
         {
-            UserDetails = context.Users.Where(u => u.UserId == userId).FirstOrDefault();
-            if (UserDetails != null)
-            {
-                Id = UserDetails.UserId;
-                UserName = UserDetails.email;
-            }
+            UserDetails = _context.Users.FirstOrDefault(u => u.UserId == userId);
+            if (UserDetails == null) return;
+            Id = UserDetails.UserId;
+            UserName = UserDetails.email;
         }
         public int Id{get; set;}
         public string UserName {get; set;}

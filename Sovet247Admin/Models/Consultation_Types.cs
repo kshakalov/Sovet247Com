@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace Sovet247Admin.Models
 {
     using System;
@@ -20,7 +22,9 @@ namespace Sovet247Admin.Models
         }
     
         public int ConsultationTypeId { get; set; }
+        [DisplayName("Тип консультации")]
         public string consultation_type { get; set; }
+        [DisplayName("Активен")]
         public byte active { get; set; }
     
         public virtual ICollection<Consultation> Consultations { get; set; }

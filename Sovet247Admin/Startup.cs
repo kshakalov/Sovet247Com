@@ -1,7 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using Sovet247Admin;
 
-[assembly: OwinStartupAttribute(typeof(Sovet247Admin.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 namespace Sovet247Admin
 {
     public partial class Startup

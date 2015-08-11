@@ -1,4 +1,4 @@
-﻿@using Sovet247Admin.Models;
+﻿@using Sovet247Admin.Models
 @{ConsultationsDbContext _context=new ConsultationsDbContext();
   List<Menu> menuList = null;
   if(User.Identity.IsAuthenticated)
@@ -39,7 +39,7 @@
 </ul>
 
 
-@helper RenderMenuItem(List<Sovet247Admin.Models.Menu> menuList, Sovet247Admin.Models.Menu mi)
+@helper RenderMenuItem(List<Menu> menuList, Menu mi)
 {
     foreach (var cp in menuList.Where(p => p.parent_id == mi.MenuId))
     {

@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace Sovet247Admin.Models
 {
     using System;
@@ -20,6 +22,7 @@ namespace Sovet247Admin.Models
         }
     
         public int ConsultationStatusId { get; set; }
+        [DisplayName("Статус")]
         public string status_title { get; set; }
     
         public virtual ICollection<Consultation> Consultations { get; set; }

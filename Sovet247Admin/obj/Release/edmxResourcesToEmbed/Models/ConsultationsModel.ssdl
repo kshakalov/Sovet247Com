@@ -11,6 +11,7 @@
     <Property Name="subject" Type="nvarchar" MaxLength="500" />
     <Property Name="message" Type="nvarchar(max)" />
     <Property Name="dateCreated" Type="datetime" Nullable="false" />
+    <Property Name="IsHasRead" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Consultants">
     <Key>
@@ -171,15 +172,27 @@
     <Property Name="can_publish_questions" Type="smallint" Nullable="false" />
     <Property Name="RoleId" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="FK_AdminMessages_AdminMessages">
-    <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="1" />
-    <End Role="AdminMessages1" Type="Self.AdminMessages" Multiplicity="*" />
+  <Association Name="FK_AdminMessages_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="AdminMessages">
-        <PropertyRef Name="adminMessageId" />
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
       </Principal>
-      <Dependent Role="AdminMessages1">
-        <PropertyRef Name="parentMessageId" />
+      <Dependent Role="AdminMessages">
+        <PropertyRef Name="fromUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdminMessages_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="AdminMessages">
+        <PropertyRef Name="toUserId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -406,9 +419,13 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_AdminMessages_AdminMessages" Association="Self.FK_AdminMessages_AdminMessages">
+    <AssociationSet Name="FK_AdminMessages_Users" Association="Self.FK_AdminMessages_Users">
+      <End Role="Users" EntitySet="Users" />
       <End Role="AdminMessages" EntitySet="AdminMessages" />
-      <End Role="AdminMessages1" EntitySet="AdminMessages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdminMessages_Users1" Association="Self.FK_AdminMessages_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="AdminMessages" EntitySet="AdminMessages" />
     </AssociationSet>
     <AssociationSet Name="FK_Consultants_Professions" Association="Self.FK_Consultants_Professions">
       <End Role="Professions" EntitySet="Professions" />

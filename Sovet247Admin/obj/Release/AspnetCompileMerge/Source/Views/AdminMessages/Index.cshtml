@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<Sovet247Admin.Models.AdminMessage>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Сообщения";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Сообщения</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Написать сообщение", "Create")
 </p>
 <table class="table">
-    <tr>
+    <tr style="max-height:100px; overflow:hidden;">
         <th>
             @Html.DisplayNameFor(model => model.fromUserId)
         </th>
@@ -27,36 +27,24 @@
         <th>
             @Html.DisplayNameFor(model => model.dateCreated)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AdminMessage1.subject)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.fromUserId)
+            @Html.DisplayFor(modelItem => item.FromUser.firstname) @Html.DisplayFor(modelItem => item.FromUser.lastname)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.toUserId)
+            @Html.DisplayFor(modelItem => item.ToUser.firstname) @Html.DisplayFor(modelItem => item.ToUser.lastname)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.subject)
+        <td class="messagefield">
+            @Html.ActionLink(item.subject, "Details", new { id = item.adminMessageId })
         </td>
-        <td>
+        <td class="messagefield">
             @Html.DisplayFor(modelItem => item.message)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.dateCreated)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdminMessage1.subject)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.adminMessageId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.adminMessageId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.adminMessageId })
         </td>
     </tr>
 }

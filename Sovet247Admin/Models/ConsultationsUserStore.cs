@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
-using System.Threading.Tasks;
-using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
+using Microsoft.AspNet.Identity;
 
 namespace Sovet247Admin.Models
 {
     public class ConsultationsUserStore:IUserStore<ConsultationsUser, int>, IUserPasswordStore<ConsultationsUser, int>, IUserLockoutStore<ConsultationsUser,int>,
         IUserTwoFactorStore<ConsultationsUser,int>, IUserRoleStore<ConsultationsUser,int>
     {
-        ConsultationsDbContext _context;
+        readonly ConsultationsDbContext _context;
         public ConsultationsUserStore(ConsultationsDbContext context)
         {
             _context = context;
@@ -118,16 +117,15 @@ namespace Sovet247Admin.Models
 
         public Task AddToRoleAsync(ConsultationsUser user, string roleName)
         {
-            var roleId = _context.Roles
-                .Where(r => r.role_title == roleName).First().RoleId;
+            var roleId = _context.Roles.First(r => r.role_title == roleName).RoleId;
             user.UserDetails.RoleId = roleId;
             return _context.SaveChangesAsync();
             //throw new NotImplementedException();
         }
 
-        public Task<System.Collections.Generic.IList<string>> GetRolesAsync(ConsultationsUser user)
+        public Task<IList<string>> GetRolesAsync(ConsultationsUser user)
         {
-            var res = new System.Collections.Generic.List<string>();
+            var res = new List<string>();
             
             var roles=_context.Roles.Where(r => r.RoleId==user.UserDetails.RoleId);
             foreach(var role in roles)
@@ -135,7 +133,7 @@ namespace Sovet247Admin.Models
                 res.Add(role.role_title);
             }
 
-            return Task.FromResult<System.Collections.Generic.IList<string>>(res);
+            return Task.FromResult<IList<string>>(res);
                 
             //throw new NotImplementedException();
         }
@@ -145,10 +143,7 @@ namespace Sovet247Admin.Models
             var roles=_context.Roles
                 .Where(r => r.role_title == roleName)
                 .Where(r => r.RoleId==user.UserDetails.RoleId);
-            if (roles.Count() > 0)
-                return Task.FromResult<bool>(true);
-            else
-                return Task.FromResult<bool>(false);
+            return Task.FromResult<bool>(roles.Any());
             //throw new NotImplementedException();
         }
 

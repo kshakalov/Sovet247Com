@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using System.Net;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Sovet247Admin.Models;
 
@@ -14,12 +9,12 @@ namespace Sovet247Admin.Controllers
     [Authorize(Roles="Администратор")]
     public class CountriesController : Controller
     {
-        private ConsultationsDbContext db = new ConsultationsDbContext();
+        private readonly ConsultationsDbContext _db = new ConsultationsDbContext();
 
         // GET: Countries
         public async Task<ActionResult> Index()
         {
-            return View(await db.Countries.ToListAsync());
+            return View(await _db.Countries.ToListAsync());
         }
 
         // GET: Countries/Details/5
@@ -29,7 +24,7 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = await db.Countries.FindAsync(id);
+            Country country = await _db.Countries.FindAsync(id);
             if (country == null)
             {
                 return HttpNotFound();
@@ -52,8 +47,8 @@ namespace Sovet247Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Countries.Add(country);
-                await db.SaveChangesAsync();
+                _db.Countries.Add(country);
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +62,7 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = await db.Countries.FindAsync(id);
+            Country country = await _db.Countries.FindAsync(id);
             if (country == null)
             {
                 return HttpNotFound();
@@ -84,8 +79,8 @@ namespace Sovet247Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(country).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(country).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(country);
@@ -98,7 +93,7 @@ namespace Sovet247Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Country country = await db.Countries.FindAsync(id);
+            Country country = await _db.Countries.FindAsync(id);
             if (country == null)
             {
                 return HttpNotFound();
@@ -111,9 +106,9 @@ namespace Sovet247Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            Country country = await db.Countries.FindAsync(id);
-            db.Countries.Remove(country);
-            await db.SaveChangesAsync();
+            Country country = await _db.Countries.FindAsync(id);
+            _db.Countries.Remove(country);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -121,7 +116,7 @@ namespace Sovet247Admin.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }
