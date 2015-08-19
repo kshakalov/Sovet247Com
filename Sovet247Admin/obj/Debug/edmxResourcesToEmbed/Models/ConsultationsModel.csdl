@@ -90,6 +90,7 @@
     <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Consultations" FromRole="Consultations" ToRole="Messages" />
     <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_Consultations" FromRole="Consultations" ToRole="Transactions" />
     <NavigationProperty Name="User" Relationship="ConsultationsModel.ConsultationUser" FromRole="Consultation" ToRole="User" />
+    <Property Name="admin_comments" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Country">
     <Key>
@@ -488,6 +489,10 @@
       <End Role="Consultation" EntitySet="Consultations" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
+    <AssociationSet Name="FK_AdminMessages_AdminMessages" Association="ConsultationsModel.FK_AdminMessages_AdminMessages">
+      <End Role="AdminMessage" EntitySet="AdminMessages" />
+      <End Role="AdminMessage1" EntitySet="AdminMessages" />
+    </AssociationSet>
   </EntityContainer>
   <Association Name="FK_Consultants_Professions">
     <End Type="ConsultationsModel.Profession" Role="Profession" Multiplicity="1" />
@@ -546,6 +551,18 @@
       </Principal>
       <Dependent Role="Consultation">
         <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdminMessages_AdminMessages">
+    <End Type="ConsultationsModel.AdminMessage" Role="AdminMessage" Multiplicity="1" />
+    <End Type="ConsultationsModel.AdminMessage" Role="AdminMessage1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdminMessage">
+        <PropertyRef Name="adminMessageId" />
+      </Principal>
+      <Dependent Role="AdminMessage1">
+        <PropertyRef Name="parentMessageId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,114 +1,106 @@
 ﻿@model Sovet247Admin.Models.Consultation
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Просмотр консультации";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Просмотр консультации</h2>
+<table><tr><td>
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
 
-<div>
-    <h4>Consultation</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
+            <dd>
+                <strong>@Html.DisplayFor(model => model.Consultation_Types.consultation_type)</strong>
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.subject)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.firstname) @Html.DisplayFor(model=>model.User.lastname)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.subject)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ConsultantId)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.create_date)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Consultant.User.firstname) @Html.DisplayFor(model => model.Consultant.User.lastname)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.create_date)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.subject)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.update_date)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.subject)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.update_date)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.create_date)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customer_rating)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.create_date)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.customer_rating)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Profession.Profession_Title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.customer_comments)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Profession.Profession_Title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.customer_comments)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Specialty.Specialty_title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.consultation_price)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Specialty.Specialty_title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.consultation_price)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.consultation_price)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Consultant.specialization)
-        </dt>
+            <dd>
+                $@Html.DisplayFor(model => model.consultation_price)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Consultant.specialization)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Consultation_Statuses.status_title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Consultation_Statuses.status_title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Consultation_Statuses.status_title)
+            </dd>
+            
+            <dt>
+                @Html.DisplayNameFor(model => model.customer_comments)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Consultation_Statuses.status_title)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.customer_comments)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Consultation_Types.consultation_type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Consultation_Types.consultation_type)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Profession.Profession_Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Profession.Profession_Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Specialty.Specialty_title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Specialty.Specialty_title)
-        </dd>
-
-    </dl>
-</div>
+        </dl>
+    </div>
+</td>
+    @using (Html.BeginForm("SaveAdminComments","Consultations"))
+    {
+        @Html.AntiForgeryToken()
+    <td style="padding-left:20px;">
+        @Html.HiddenFor(model=>model.ConsultationId)
+         @Html.LabelFor(it=>it.admin_comments) <br /> @Html.TextAreaFor(it => it.admin_comments, new { @class="form-control", @style="height:70%; width:100%;"})
+        <input type="submit" class="form-control" style="margin-top:10px;display:inline-block;" value="Сохранить комментарий" />
+    </td>
+    }
+    </tr>
+</table>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ConsultationId }) |
     @Html.ActionLink("Back to List", "Index")

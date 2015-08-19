@@ -64,6 +64,7 @@
     <EntitySetMapping Name="Consultations">
       <EntityTypeMapping TypeName="ConsultationsModel.Consultation">
         <MappingFragment StoreEntitySet="Consultations">
+          <ScalarProperty Name="admin_comments" ColumnName="admin_comments" />
           <ScalarProperty Name="ConsultationId" ColumnName="ConsultationId" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />
           <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />

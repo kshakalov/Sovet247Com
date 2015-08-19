@@ -25,9 +25,13 @@
 <table class="table">
      <tr>
          <th></th>
+         <th>Номер</th>
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().UserId)
         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().ConsultantId)
+         </th>
          <th>
              @Html.DisplayNameFor(model => model.FirstOrDefault().subject)
          </th>
@@ -55,10 +59,9 @@
         <th>
             @Html.DisplayNameFor(model => model.FirstOrDefault().customer_comments)
         </th>
-
-
-      
-        <th></th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().admin_comments)
+         </th>
     </tr>
     @foreach (var item in Model)
     {
@@ -81,7 +84,7 @@
                 color = "#FF6666";
                 break;
         }
-        <tr style="background-color:@color;">
+        <tr style="background-color:@color;cursor:pointer;" onclick="window.location.href='/Consultations/Details/@item.ConsultationId'">
             <td>
                 @{
                 var f=color;
@@ -94,7 +97,18 @@
                 <div style="width:20px;height:20px;background-color:@f;">&nbsp;</div>
             </td>
             <td>
+                @{
+                    var number = "";
+                    number += item.create_date.ToString("yyMMdd");
+                    number += "-" + item.ConsultationId.ToString().PadLeft(7, '0');
+                }
+                @number
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.User.firstname) @Html.DisplayFor(modelItem=>item.User.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultant.User.firstname) @Html.DisplayFor(modelItem => item.Consultant.User.lastname)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.subject)
@@ -123,22 +137,15 @@
             <td>
                 @Html.DisplayFor(modelItem => item.customer_comments)
             </td>
-           
-           
-
-
-           
             <td>
-                @Html.ActionLink("Edit", "Edit", new {id = item.ConsultationId}) |
-                @Html.ActionLink("Details", "Details", new {id = item.ConsultationId}) |
-                @Html.ActionLink("Delete", "Delete", new {id = item.ConsultationId})
+                @Html.DisplayFor(modelItem => item.admin_comments)
             </td>
         </tr>
     }
 
 </table>
 <br/>
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    Стр. @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
 
     @Html.PagedListPager(Model, page => Url.Action("Index",
          new { page, consultation_status_search =(ViewBag.consultation_status_search as SelectList).SelectedValue as int?, ViewBag.customer_name_search, ViewBag.consultant_name_search }))

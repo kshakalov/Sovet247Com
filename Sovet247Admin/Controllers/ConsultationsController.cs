@@ -140,6 +140,30 @@ namespace Sovet247Admin.Controllers
             return View(consultation);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SaveAdminComments([Bind(Include = "ConsultationId, admin_comments")]Consultation consultation)
+        {
+            Consultation cons = await _db.Consultations.FindAsync(consultation.ConsultationId);
+            if (ModelState.IsValid)
+            {
+                if (cons == null)
+                {
+                    return HttpNotFound();
+                }
+                cons.admin_comments=consultation.admin_comments;
+                _db.Entry(cons).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
+                return RedirectToAction("Details", new { id=consultation.ConsultationId});
+            }
+         /*   ViewBag.ConsultantId = new SelectList(_db.Consultants, "ConsultantId", "specialization", consultation.ConsultantId);
+            ViewBag.consultation_status = new SelectList(_db.Consultation_Statuses, "ConsultationStatusId", "status_title", consultation.consultation_status);
+            ViewBag.consultation_type = new SelectList(_db.Consultation_Types, "ConsultationTypeId", "consultation_type", consultation.consultation_type);
+            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", consultation.ProfessionId);
+            ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyId", "Specialty_title", consultation.SpecialtyId);*/
+            return View(cons);
+        }
+
         // GET: Consultations/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
