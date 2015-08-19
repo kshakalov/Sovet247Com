@@ -13,7 +13,7 @@ namespace Sovet247Admin.Models
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class Consultation
     {
         public Consultation()
@@ -22,10 +22,11 @@ namespace Sovet247Admin.Models
             this.Messages = new HashSet<Message>();
             this.Transactions = new HashSet<Transaction>();
         }
-    
+
         public int ConsultationId { get; set; }
         [DisplayName("Клиент")]
         public int UserId { get; set; }
+        [DisplayName("Консультант")]
         public Nullable<int> ConsultantId { get; set; }
         [DisplayName("Вопрос")]
         public string subject { get; set; }
@@ -47,7 +48,10 @@ namespace Sovet247Admin.Models
         public string customer_comments { get; set; }
         [DisplayName("Стоимость вопроса")]
         public decimal consultation_price { get; set; }
-    
+        [DisplayName("Комментарий администратора")]
+        public string admin_comments { get; set; }
+
+
         public virtual Consultant Consultant { get; set; }
         public virtual Consultation_Statuses Consultation_Statuses { get; set; }
         public virtual ICollection<Consultation_Time> Consultation_Time { get; set; }
