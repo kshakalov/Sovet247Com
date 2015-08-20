@@ -1,0 +1,152 @@
+﻿@model PagedList.IPagedList<Sovet247Admin.Models.Consultation>
+@using PagedList.Mvc;
+@using Sovet247Admin.Models;
+
+
+@{
+    ViewBag.Title = "Список консультаций";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список консультаций</h2>
+
+@using (Html.BeginForm())
+{
+    <div style="float:left;width:100%; text-align:center;">
+        @{var style="max-width:220px; display:inline-block;";}
+        <span class="control-label">Cтатус: </span>@Html.DropDownList("consultation_status_search", ViewBag.consultation_status_search as SelectList, "", new { @class = "form-control", style = @style })
+        <span class="control-label">Клиент: </span>@Html.TextBox("customer_name_search", ViewBag.customer_name_search as string, new { @class = "form-control", style = @style})
+        <span class="control-label">Консультант: </span>@Html.TextBox("consultant_name_search", ViewBag.consultant_name_search as string, new { @class = "form-control", style = @style })
+    </div>
+        <br />
+        <div style="margin-top:20px;text-align:center; float:left;width:100%;"><input type="submit" class="form-control" style="display:inline-block;" value="Найти" /> <input type="button" class="form-control" style="display:inline-block;" value="Сбросить" onclick="window.location.href='/Consultations';" /></div>
+    
+}
+<table class="table">
+     <tr>
+         <th></th>
+         <th>Номер</th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().UserId)
+        </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().ConsultantId)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().subject)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Consultation_Types.consultation_type)
+         </th>
+        <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Consultation_Statuses.status_title)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().create_date)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().consultation_price)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Profession.Profession_Title)
+         </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().Specialty.Specialty_title)
+         </th>
+       <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().customer_rating)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().customer_comments)
+        </th>
+         <th>
+             @Html.DisplayNameFor(model => model.FirstOrDefault().admin_comments)
+         </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        var color="white";
+        switch(item.consultation_status)
+        {
+            case 1:
+                color = "white";
+                break;
+            case 2:
+                color = "#FFFF00";
+                break;
+            case 3:
+                color = "#33FF33";
+                break;
+            case 4:
+                color = "white";
+                break;
+            default:
+                color = "#FF6666";
+                break;
+        }
+        <tr style="background-color:@color;cursor:pointer;" onclick="window.location.href='/Consultations/Details/@item.ConsultationId'">
+            <td>
+                @{
+                var f=color;
+                if(item.consultation_status==4)
+                {
+                    f="#33FF33";  
+                }
+                }
+                
+                <div style="width:20px;height:20px;background-color:@f;">&nbsp;</div>
+            </td>
+            <td>
+                @{
+                    var number = "";
+                    number += item.create_date.ToString("yyMMdd");
+                    number += "-" + item.ConsultationId.ToString().PadLeft(7, '0');
+                }
+                @number
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.firstname) @Html.DisplayFor(modelItem=>item.User.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultant.User.firstname) @Html.DisplayFor(modelItem => item.Consultant.User.lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.subject)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultation_Types.consultation_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consultation_Statuses.status_title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.create_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.consultation_price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Profession.Profession_Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Specialty.Specialty_title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.customer_comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.admin_comments)
+            </td>
+        </tr>
+    }
+
+</table>
+<br/>
+    Стр. @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+         new { page, consultation_status_search =(ViewBag.consultation_status_search as SelectList).SelectedValue as int?, ViewBag.customer_name_search, ViewBag.consultant_name_search }))
+

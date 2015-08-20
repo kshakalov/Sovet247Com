@@ -156,11 +156,6 @@ namespace Sovet247Admin.Controllers
                 await _db.SaveChangesAsync();
                 return RedirectToAction("Details", new { id=consultation.ConsultationId});
             }
-         /*   ViewBag.ConsultantId = new SelectList(_db.Consultants, "ConsultantId", "specialization", consultation.ConsultantId);
-            ViewBag.consultation_status = new SelectList(_db.Consultation_Statuses, "ConsultationStatusId", "status_title", consultation.consultation_status);
-            ViewBag.consultation_type = new SelectList(_db.Consultation_Types, "ConsultationTypeId", "consultation_type", consultation.consultation_type);
-            ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", consultation.ProfessionId);
-            ViewBag.SpecialtyId = new SelectList(_db.Specialties, "SpecialtyId", "Specialty_title", consultation.SpecialtyId);*/
             return View(cons);
         }
 

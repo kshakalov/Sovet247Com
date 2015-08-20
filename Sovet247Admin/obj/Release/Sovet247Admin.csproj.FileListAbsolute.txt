@@ -75,3 +75,7 @@ D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\System.Web.Optimization.xml
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\obj\Release\Sovet247Admin.csprojResolveAssemblyReference.cache
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\obj\Release\Sovet247Admin.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\obj\Release\Sovet247Admin.pdb
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.dll
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.Mvc.dll
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.xml
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.Mvc.xml

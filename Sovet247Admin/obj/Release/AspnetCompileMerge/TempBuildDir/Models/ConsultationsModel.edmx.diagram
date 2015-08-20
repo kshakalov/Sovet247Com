@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d9ef3ab456eb4f78a929926c463dcddd" Name="Diagram1">
+      <Diagram DiagramId="d9ef3ab456eb4f78a929926c463dcddd" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="ConsultationsModel.AdminMessage" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsultationsModel.Consultant" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsultationsModel.Consultation_Statuses" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
@@ -39,6 +39,8 @@
         <AssociationConnector Association="ConsultationsModel.FK_Consultants_Specialties" />
         <AssociationConnector Association="ConsultationsModel.FK_AdminMessages_Users" />
         <AssociationConnector Association="ConsultationsModel.FK_AdminMessages_Users1" />
+        <AssociationConnector Association="ConsultationsModel.ConsultationUser" />
+        <AssociationConnector Association="ConsultationsModel.FK_AdminMessages_AdminMessages" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

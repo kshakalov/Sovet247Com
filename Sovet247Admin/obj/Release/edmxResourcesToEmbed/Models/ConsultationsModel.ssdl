@@ -72,6 +72,7 @@
     <Property Name="customer_rating" Type="decimal" Precision="18" Scale="1" />
     <Property Name="customer_comments" Type="nvarchar" MaxLength="4000" />
     <Property Name="consultation_price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="admin_comments" Type="nvarchar" MaxLength="4000" />
   </EntityType>
   <EntityType Name="Countries">
     <Key>
@@ -172,6 +173,18 @@
     <Property Name="can_publish_questions" Type="smallint" Nullable="false" />
     <Property Name="RoleId" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK_AdminMessages_AdminMessages">
+    <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="1" />
+    <End Role="AdminMessages1" Type="Self.AdminMessages" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AdminMessages">
+        <PropertyRef Name="adminMessageId" />
+      </Principal>
+      <Dependent Role="AdminMessages1">
+        <PropertyRef Name="parentMessageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_AdminMessages_Users">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />
     <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="*" />
@@ -304,6 +317,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Consultations_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Consultations" Type="Self.Consultations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Consultations">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Menu_Menu">
     <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
     <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
@@ -419,6 +444,10 @@
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AdminMessages_AdminMessages" Association="Self.FK_AdminMessages_AdminMessages">
+      <End Role="AdminMessages" EntitySet="AdminMessages" />
+      <End Role="AdminMessages1" EntitySet="AdminMessages" />
+    </AssociationSet>
     <AssociationSet Name="FK_AdminMessages_Users" Association="Self.FK_AdminMessages_Users">
       <End Role="Users" EntitySet="Users" />
       <End Role="AdminMessages" EntitySet="AdminMessages" />
@@ -461,6 +490,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Consultations_Specialties" Association="Self.FK_Consultations_Specialties">
       <End Role="Specialties" EntitySet="Specialties" />
+      <End Role="Consultations" EntitySet="Consultations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Consultations_Users" Association="Self.FK_Consultations_Users">
+      <End Role="Users" EntitySet="Users" />
       <End Role="Consultations" EntitySet="Consultations" />
     </AssociationSet>
     <AssociationSet Name="FK_Menu_Menu" Association="Self.FK_Menu_Menu">
