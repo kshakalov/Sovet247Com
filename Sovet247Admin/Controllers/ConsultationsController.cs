@@ -15,7 +15,7 @@ namespace Sovet247Admin.Controllers
         private readonly ConsultationsDbContext _db = new ConsultationsDbContext();
 
         // GET: Consultations
-        public ViewResult Index(int? page, int? consultation_status_search, string customer_name_search, string consultant_name_search)
+        public ViewResult Index(int? page, int? consultation_status_search, string customer_name_search, string consultant_name_search, int? specialty_search)
         {
             if (page == null)
                 page= 1;
@@ -30,7 +30,11 @@ namespace Sovet247Admin.Controllers
                 consultations = consultations.Where(c => c.consultation_status == consultation_status_search).OrderByDescending(c => c.update_date);
                 ViewBag.consultation_status_id = consultation_status_search;
             }
-                
+
+            if (specialty_search != null)
+            {
+                consultations=consultations.Where(c=>c.SpecialtyId==specialty_search)
+            }
 
             if (!String.IsNullOrEmpty(customer_name_search))
             {
@@ -45,6 +49,7 @@ namespace Sovet247Admin.Controllers
                 ViewBag.consultant_name_search = consultant_name_search;
             }
             ViewBag.consultation_status_search = new SelectList(_db.Consultation_Statuses, "consultationStatusId", "status_title", ViewBag.consultation_status_id as int?);
+            ViewBag.specialty_search=new SelectList(_db.Specialties, "specilatyId", "specialty_title", ViewBag.specialty_search_id as int?);
             int pageSize = 5;
             int pageNumber = (page ?? 1);
             consultations=consultations.OrderByDescending(c=>c.update_date);

@@ -12,11 +12,14 @@
 
 @using (Html.BeginForm())
 {
-    <div style="float:left;width:100%; text-align:center;">
-        @{var style="max-width:220px; display:inline-block;";}
-        <span class="control-label">Cтатус: </span>@Html.DropDownList("consultation_status_search", ViewBag.consultation_status_search as SelectList, "", new { @class = "form-control", style = @style })
-        <span class="control-label">Клиент: </span>@Html.TextBox("customer_name_search", ViewBag.customer_name_search as string, new { @class = "form-control", style = @style})
-        <span class="control-label">Консультант: </span>@Html.TextBox("consultant_name_search", ViewBag.consultant_name_search as string, new { @class = "form-control", style = @style })
+    <div style="float: left; width: 100%; text-align: center;">
+        @{var style = "max-width:220px; display:inline-block;";}
+        <span class="control-label">Cтатус: </span>@Html.DropDownList("consultation_status_search", ViewBag.consultation_status_search as SelectList, "", new {@class = "form-control", style = @style})
+        <span class="control-label">Клиент: </span>@Html.TextBox("customer_name_search", ViewBag.customer_name_search as string, new {@class = "form-control", style = @style})
+        <span class="control-label">Консультант: </span>@Html.TextBox("consultant_name_search", ViewBag.consultant_name_search as string, new {@class = "form-control", style = @style})
+    </div>
+    <div>
+        <span class="control-label">Специальность: </span>@Html.DropDownList("specialty_search", ViewBag.specialty_search as SelectList, "", new { @class = "form-control", style = @style })
     </div>
         <br />
         <div style="margin-top:20px;text-align:center; float:left;width:100%;"><input type="submit" class="form-control" style="display:inline-block;" value="Найти" /> <input type="button" class="form-control" style="display:inline-block;" value="Сбросить" onclick="window.location.href='/Consultations';" /></div>
