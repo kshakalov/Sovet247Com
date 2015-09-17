@@ -79,3 +79,7 @@ D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.Mvc.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.xml
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.Mvc.xml
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Core.Calendar.dll
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Core.Platform.dll
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Core.Portable.dll
+D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\DDay.iCal.dll
