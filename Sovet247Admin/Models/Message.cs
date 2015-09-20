@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace Sovet247Admin.Models
 {
     using System;
@@ -16,10 +18,15 @@ namespace Sovet247Admin.Models
     {
         public int MessageId { get; set; }
         public Nullable<int> ConsultationId { get; set; }
+        [DisplayName("Текст сообщения")]
         public string message1 { get; set; }
+        [DisplayName("Дата")]
         public Nullable<System.DateTime> added_date { get; set; }
+        [DisplayName("Вложения")]
         public string attachment { get; set; }
+        [DisplayName("Автор")]
         public Nullable<int> UserId { get; set; }
+        [DisplayName("Опубликован")]
         public byte published { get; set; }
     
         public virtual Consultation Consultation { get; set; }

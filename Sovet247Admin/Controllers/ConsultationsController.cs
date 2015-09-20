@@ -96,6 +96,9 @@ namespace Sovet247Admin.Controllers
             {
                 return HttpNotFound();
             }
+
+            var messages = consultation.Messages;
+            ViewBag.messages = messages;
             return View(consultation);
         }
 

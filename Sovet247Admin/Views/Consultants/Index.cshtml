@@ -15,9 +15,6 @@
 
 </div>
 
-<p>
-    @Html.ActionLink("Добавить эксперта", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -72,7 +69,8 @@
         <td>
             @Html.ActionLink("Изменить", "Edit", new { id=item.ConsultantId }) <br />
             @Html.ActionLink("Детали", "Details", new { id=item.ConsultantId }) <br />
-            @Html.ActionLink("Удалить", "Delete", new { id=item.ConsultantId })
+            @Html.ActionLink("Удалить", "Delete", new {id = item.ConsultantId})<br/>
+            @Html.ActionLink("Написать", "Create", "AdminMessages",new { id = item.ConsultantId }, null)
         </td>
     </tr>
 }

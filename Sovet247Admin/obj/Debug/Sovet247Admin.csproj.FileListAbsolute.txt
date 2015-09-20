@@ -44,7 +44,6 @@ D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Microsoft.Owin.Security.Microsoft
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Microsoft.Owin.Security.OAuth.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Microsoft.Owin.Security.Twitter.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Microsoft.Web.Infrastructure.dll
-D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Newtonsoft.Json.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Owin.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\System.ComponentModel.DataAnnotations.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\System.Configuration.dll
@@ -79,7 +78,3 @@ D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.Mvc.dll
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.xml
 D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\PagedList.Mvc.xml
-D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Core.Calendar.dll
-D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Core.Platform.dll
-D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\Core.Portable.dll
-D:\Work\Canada\Sovet247Admin\Sovet247Admin\bin\DDay.iCal.dll

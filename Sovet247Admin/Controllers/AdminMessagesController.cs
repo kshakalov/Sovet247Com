@@ -84,10 +84,21 @@ namespace Sovet247Admin.Controllers
 
 
         // GET: AdminMessages/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
             ViewBag.fromUserId = User.Identity.GetUserId<int>();
-            ViewBag.ToUserIdSelectList = new SelectList(_db.Users, "UserId", "email");
+            if (id != null)
+            {
+                var toUser=_db.Consultants.Find(id).User.email;
+                var list=new SelectList(new[]{toUser});
+
+                ViewBag.ToUserIdSelectList = list;
+            }
+            else
+            {
+                ViewBag.ToUserIdSelectList = new SelectList(_db.Users, "UserId", "email");
+            }
+            
             return View();
         }
 
