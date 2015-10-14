@@ -30,3 +30,7 @@ textarea {
     overflow:hidden;
     word-wrap:break-word;
 }
+
+td.message {
+    border: 1px solid gray;
+}

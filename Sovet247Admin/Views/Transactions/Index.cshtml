@@ -1,0 +1,112 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Sovet247Admin.Models.Transaction>
+
+@{
+    ViewBag.Title = "Операции со счетами";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Список финансовых операций</h2>
+
+@using (Html.BeginForm())
+{
+    <table style="width: 100%; text-align: center;">
+        @{ var style = "max-width:220px; display:inline-block;"; }
+        <tr>
+            <td><span class="control-label">Тип операции: </span></td>
+            <td>@Html.DropDownList("transactionTypeSearch", ViewBag.transactionTypeSearch as SelectList, "", new {@class = "form-control", style = @style})</td>
+            <td><span class="control-label">Имя: </span></td>
+            <td>@Html.TextBox("userNameSearch", ViewBag.userNameSearch as string, new {@class = "form-control", style = @style})</td>
+        </tr>
+        
+        <tr>
+            <td><span class="control-label">Дата с:</span></td>
+            <td>@Html.TextBox("fromDateSearch", ViewBag.fromDateSearch as DateTime?, new {@class = "form-control jquery-datepicker", style = @style})</td>
+            <td><span class="control-label">Дата по:</span></td>
+            <td>@Html.TextBox("toDateSearch", ViewBag.toDateSearch as DateTime?, new {@class = "form-control jquery-datepicker", style = @style})</td>
+        </tr>
+
+        <tr>
+            <td colspan="4">
+                <div style="margin-top: 20px; text-align: center; float: left; width: 100%;"><input type="submit" class="form-control" style="display: inline-block;" value="Найти"/> <input type="button" class="form-control" style="display: inline-block;" value="Сбросить" onclick="window.location.href = '/Consultations';"/>
+                </div></td>
+        </tr>
+    </table>
+}
+
+        <p>
+            @Html.ActionLink("Создать новую операцию", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().transactionDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstOrDefault().ConsultationId)
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.firstname) @Html.DisplayFor(modelItem=>item.User.lastname)
+                    </td>
+                    <td>
+                        @{
+                var style = (item.amount < 0) ? "red" : "green";
+                        }
+                        <span style="color:@style">@Html.DisplayFor(modelItem => item.amount)</span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.transactionDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Consultation.subject)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Изменить", "Edit", new {id = item.TransactionId}) |
+                        @Html.ActionLink("Подробнее", "Details", new {id = item.TransactionId}) |
+                        @Html.ActionLink("Удалить", "Delete", new {id = item.TransactionId})
+                    </td>
+                </tr>
+}
+
+        </table>
+        <br />
+        Стр. @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) из @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("Index",
+         new
+         {
+             page,
+             transactionTypeSearch = (ViewBag.transactionTypeSearch as SelectList).SelectedValue as int?,
+             ViewBag.userNameSearch,
+             fromDateSearch=ViewBag.fromDateSearch as DateTime?,
+             toDateSearch=ViewBag.toDateSearch as DateTime?
+         }))
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".jquery-datepicker").datepicker({
+            format: "dd.mm.yyyy",
+            language: "ru-RU",
+            clearBtn: true
+        });
+    });
+
+</script>

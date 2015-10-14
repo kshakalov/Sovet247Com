@@ -8,9 +8,49 @@
 <h2>Список экспертов</h2>
 
 <div>
-    @using(Html.BeginForm())
+    @using (Html.BeginForm())
     {
-        <p>Найти по имени: @Html.TextBox("searchConsultantName") <input type="submit" value="Найти" /></p>
+        <table style="width: 100%; text-align: center;">
+            <tr>
+                @{var style = "max-width:220px; display:inline-block;";}
+                <td><span class="control-label">Найти по имени:</span></td>
+                <td>@Html.TextBox("searchConsultantName", ViewBag.searchConsultantName as string, new{@class = "form-control",style = @style})</td>
+                <td><span class="control-label">Статус консультанта:</span></td>
+                <td>
+                    @Html.DropDownList("consultantStatusSearch", ViewBag.consultantStatusSearch as SelectList, "", new
+                    {
+                        @class = "form-control",
+                        style = @style
+                    })
+            </td>
+        </tr>
+            <tr>
+                <td><span class="control-label">Профессия:</span></td>
+                <td>@Html.DropDownList("consultantProfessionSearch", ViewBag.consultantProfessionSearch as SelectList, "", new
+                    {
+                        @class = "form-control",
+                        style = @style,
+                        onchange = "submit();"
+                    })</td>
+                <td><span class="control-label">Специальность:</span></td>
+                <td>@Html.DropDownList("consultantSpecialtySearch", ViewBag.consultantSpecialtySearch as SelectList, "", new
+                    {
+                        @class = "form-control",
+                        style = @style
+                    })</td>
+
+            </tr>
+            <tr>
+                <td><span class="control-label">Телефон:</span></td>
+                <td>@Html.TextBox("consultantPhoneSearch", ViewBag.consultantPhoneSearch as string, new { @class = "form-control", style = @style })</td>
+                <td><span class="control-label">E-mail:</span></td>
+                <td>@Html.TextBox("consultantEmailSearch", ViewBag.consultantEmailSearch as string, new { @class = "form-control", style = @style })</td>
+            </tr>
+        <tr>
+            <td colspan="4"><input type="submit" value="Найти" /></td>
+        </tr>
+    </table>
+
     }
 
 </div>
@@ -39,6 +79,12 @@
         <th>
             @Html.DisplayNameFor(model => model.comission_percent)
         </th>
+        <th>
+            <span>Баланс</span>
+        </th>
+        <th>
+            <span>Рейтинг эксперта</span>
+        </th>
         <th></th>
     </tr>
 
@@ -66,6 +112,20 @@
         <td>
             @Html.DisplayFor(modelItem => item.comission_percent)
         </td>
+        <td>
+            @{
+                var balance = item.User.Transactions.Sum(t => t.amount);
+            }
+            @Html.ActionLink("$"+balance,"Index","Transactions",null, new{userId=item.UserId})
+            
+        </td>
+        <td>
+            @{
+                var rating = item.Consultations.Average(t=>t.customer_rating);
+            }
+            @Html.DisplayFor(modelItem => rating)
+        </td>
+
         <td>
             @Html.ActionLink("Изменить", "Edit", new { id=item.ConsultantId }) <br />
             @Html.ActionLink("Детали", "Details", new { id=item.ConsultantId }) <br />

@@ -14,7 +14,9 @@ namespace Sovet247Admin.Controllers
         private readonly ConsultationsDbContext _db = new ConsultationsDbContext();
         
         // GET: Consultants
-        public async Task<ActionResult> Index(string searchConsultantName)
+        public async Task<ActionResult> Index(string searchConsultantName, bool? consultantStatusSearch,
+            int? consultantProfessionSearch, int? consultantSpecialtySearch,
+            string consultantPhoneSearch, string consultantEmailSearch)
         {
             var consultants = _db.Consultants.Include(c => c.User).Include(c => c.Profession).Include(c=>c.Specialty);
             if(!String.IsNullOrEmpty(searchConsultantName))
@@ -22,6 +24,44 @@ namespace Sovet247Admin.Controllers
                 consultants = consultants.Where(c => c.User.firstname.Contains(searchConsultantName)
                     || c.User.lastname.Contains(searchConsultantName));
             }
+
+            if (consultantStatusSearch != null)
+            {
+                consultants = consultants.Where(c => c.active == consultantStatusSearch);
+            }
+
+            if (consultantProfessionSearch != null)
+            {
+                consultants = consultants.Where(c => c.ProfessionId == consultantProfessionSearch);
+            }
+
+            if (consultantSpecialtySearch != null)
+            {
+                consultants = consultants.Where(c => c.SpecialtyId == consultantSpecialtySearch);
+            }
+
+            if (!String.IsNullOrEmpty(consultantPhoneSearch))
+            {
+                consultants = consultants.Where(c => c.User.phone.Contains(consultantPhoneSearch));
+            }
+
+            if (!String.IsNullOrEmpty(consultantEmailSearch))
+            {
+                consultants = consultants.Where(c => c.User.email.Contains(consultantEmailSearch));
+            }
+
+            ViewBag.consultantProfessionSearch = new SelectList(_db.Professions, "ProfessionId", "Profession_Title",
+                consultantProfessionSearch as int?);
+
+            ViewBag.consultantSpecialtySearch =
+                    new SelectList(_db.Specialties.Where(s => s.ProfessionId == consultantProfessionSearch).ToList(),
+                        "SpecialtyId", "Specialty_Title", consultantSpecialtySearch as int?);
+
+            ViewBag.consultantStatusSearch =
+                new SelectList(new[] {new SelectListItem{Value = "true", Text = "Активен"}, new SelectListItem{Value="false", Text = "Не активен"}}, "Value", "Text",
+                    consultantStatusSearch as bool?);
+
+           // consultants=consultants.Include(c=>c.User)
             return View(await consultants.ToListAsync());
         }
 

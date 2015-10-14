@@ -5,7 +5,7 @@
       <PropertyRef Name="adminMessageId" />
     </Key>
     <Property Name="adminMessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="parentMessageId" Type="Int32" Nullable="false" />
+    <Property Name="parentMessageId" Type="Int32" Nullable="false" DefaultValue="0" />
     <Property Name="fromUserId" Type="Int32" Nullable="false" />
     <Property Name="toUserId" Type="Int32" Nullable="false" />
     <Property Name="subject" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -489,10 +489,6 @@
       <End Role="Consultation" EntitySet="Consultations" />
       <End Role="User" EntitySet="Users" />
     </AssociationSet>
-    <AssociationSet Name="FK_AdminMessages_AdminMessages" Association="ConsultationsModel.FK_AdminMessages_AdminMessages">
-      <End Role="AdminMessage" EntitySet="AdminMessages" />
-      <End Role="AdminMessage1" EntitySet="AdminMessages" />
-    </AssociationSet>
   </EntityContainer>
   <Association Name="FK_Consultants_Professions">
     <End Type="ConsultationsModel.Profession" Role="Profession" Multiplicity="1" />
@@ -551,18 +547,6 @@
       </Principal>
       <Dependent Role="Consultation">
         <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AdminMessages_AdminMessages">
-    <End Type="ConsultationsModel.AdminMessage" Role="AdminMessage" Multiplicity="1" />
-    <End Type="ConsultationsModel.AdminMessage" Role="AdminMessage1" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AdminMessage">
-        <PropertyRef Name="adminMessageId" />
-      </Principal>
-      <Dependent Role="AdminMessage1">
-        <PropertyRef Name="parentMessageId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

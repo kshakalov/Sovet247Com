@@ -38,6 +38,11 @@ namespace Sovet247Admin.Controllers
 
             var childMessages = _db.AdminMessages.Where(wh => wh.parentMessageId == id).OrderByDescending(or=>or.dateCreated);
             ViewBag.childMessages=childMessages.ToList<AdminMessage>();
+            if (!adminMessage.IsHasRead)
+            {
+                adminMessage.IsHasRead = true;
+                _db.SaveChanges();
+            }
             //TempData.Keep();
             return View(adminMessage);
         }
@@ -89,10 +94,8 @@ namespace Sovet247Admin.Controllers
             ViewBag.fromUserId = User.Identity.GetUserId<int>();
             if (id != null)
             {
-                var toUser=_db.Consultants.Find(id).User.email;
-                var list=new SelectList(new[]{toUser});
-
-                ViewBag.ToUserIdSelectList = list;
+                var toUser = _db.Consultants.Find(id).User.UserId;
+                ViewBag.ToUserIdSelectList = new SelectList(_db.Users, "UserId", "email", toUser );
             }
             else
             {

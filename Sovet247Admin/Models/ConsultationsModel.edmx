@@ -178,18 +178,6 @@
           <Property Name="can_publish_questions" Type="smallint" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_AdminMessages_AdminMessages">
-          <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="1" />
-          <End Role="AdminMessages1" Type="Self.AdminMessages" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdminMessages">
-              <PropertyRef Name="adminMessageId" />
-            </Principal>
-            <Dependent Role="AdminMessages1">
-              <PropertyRef Name="parentMessageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AdminMessages_Users">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="AdminMessages" Type="Self.AdminMessages" Multiplicity="*" />
@@ -449,10 +437,6 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_AdminMessages_AdminMessages" Association="Self.FK_AdminMessages_AdminMessages">
-            <End Role="AdminMessages" EntitySet="AdminMessages" />
-            <End Role="AdminMessages1" EntitySet="AdminMessages" />
-          </AssociationSet>
           <AssociationSet Name="FK_AdminMessages_Users" Association="Self.FK_AdminMessages_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="AdminMessages" EntitySet="AdminMessages" />
@@ -543,7 +527,7 @@
             <PropertyRef Name="adminMessageId" />
           </Key>
           <Property Name="adminMessageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="parentMessageId" Type="Int32" Nullable="false" />
+          <Property Name="parentMessageId" Type="Int32" Nullable="false" DefaultValue="0" />
           <Property Name="fromUserId" Type="Int32" Nullable="false" />
           <Property Name="toUserId" Type="Int32" Nullable="false" />
           <Property Name="subject" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1027,10 +1011,6 @@
             <End Role="Consultation" EntitySet="Consultations" />
             <End Role="User" EntitySet="Users" />
           </AssociationSet>
-          <AssociationSet Name="FK_AdminMessages_AdminMessages" Association="ConsultationsModel.FK_AdminMessages_AdminMessages">
-            <End Role="AdminMessage" EntitySet="AdminMessages" />
-            <End Role="AdminMessage1" EntitySet="AdminMessages" />
-          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Consultants_Professions">
           <End Type="ConsultationsModel.Profession" Role="Profession" Multiplicity="1" />
@@ -1089,18 +1069,6 @@
             </Principal>
             <Dependent Role="Consultation">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_AdminMessages_AdminMessages">
-          <End Type="ConsultationsModel.AdminMessage" Role="AdminMessage" Multiplicity="1" />
-          <End Type="ConsultationsModel.AdminMessage" Role="AdminMessage1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AdminMessage">
-              <PropertyRef Name="adminMessageId" />
-            </Principal>
-            <Dependent Role="AdminMessage1">
-              <PropertyRef Name="parentMessageId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

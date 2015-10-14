@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace Sovet247Admin.Models
 {
     using System;
@@ -15,10 +17,15 @@ namespace Sovet247Admin.Models
     public partial class Transaction
     {
         public int TransactionId { get; set; }
+        [DisplayName("Пользователь")]
         public int UserId { get; set; }
+        [DisplayName("Сумма")]
         public decimal amount { get; set; }
+        [DisplayName("Дата операции")]
         public System.DateTime transactionDate { get; set; }
+        [DisplayName("Описание")]
         public string description { get; set; }
+        [DisplayName("Консультация")]
         public Nullable<int> ConsultationId { get; set; }
     
         public virtual Consultation Consultation { get; set; }

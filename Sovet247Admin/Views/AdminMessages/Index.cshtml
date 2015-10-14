@@ -31,19 +31,27 @@
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        @{
+            var style = "";
+            if (!item.IsHasRead)
+            {
+                style = "font-weight:bold;";
+            }
+        }
+
+        <td style="@style">
             @Html.DisplayFor(modelItem => item.FromUser.firstname) @Html.DisplayFor(modelItem => item.FromUser.lastname)
         </td>
-        <td>
+        <td style="@style">
             @Html.DisplayFor(modelItem => item.ToUser.firstname) @Html.DisplayFor(modelItem => item.ToUser.lastname)
         </td>
-        <td class="messagefield">
+        <td class="messagefield" style="@style">
             @Html.ActionLink(item.subject, "Details", new { id = item.adminMessageId })
         </td>
-        <td class="messagefield">
+        <td class="messagefield" style="@style">
             @Html.DisplayFor(modelItem => item.message)
         </td>
-        <td>
+        <td style="@style">
             @Html.DisplayFor(modelItem => item.dateCreated)
         </td>
     </tr>
