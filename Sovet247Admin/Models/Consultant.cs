@@ -41,7 +41,10 @@ using System.ComponentModel;
         public Nullable<decimal> comission_percent { get; set; }
         [DisplayName("Фотография")]
         public string photo_url { get; set; }
-    
+
+        [DisplayName("Комментарии администратора")]
+        public string admin_comments { get; set; }
+
         [DisplayName("Пользователь")]
         public virtual User User { get; set; }
         [DisplayName("Консультации")]

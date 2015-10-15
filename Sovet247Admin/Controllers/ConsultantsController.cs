@@ -121,7 +121,10 @@ namespace Sovet247Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserId = new SelectList(_db.Users, "UserId", "lastname", consultant.UserId);
+            var users =
+                _db.Users.OrderBy(u => u.lastname)
+                    .Select(s => new SelectListItem {Text = s.firstname + " " + s.lastname, Value = s.UserId.ToString()});
+            ViewBag.UserId = new SelectList(users, "Value", "Text", consultant.UserId);
             TempData["tmpProfessionId"]=consultant.ProfessionId;
             ViewBag.ProfessionId = new SelectList(_db.Professions, "ProfessionId", "Profession_Title", consultant.ProfessionId);
             ViewBag.SpecialtyId = new SelectList(_db.Specialties.Where(p=>p.ProfessionId==consultant.ProfessionId), "SpecialtyId", "Specialty_Title", consultant.SpecialtyId);
@@ -133,7 +136,7 @@ namespace Sovet247Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ConsultantId,ProfessionId,SpecialtyId,specialization,UserId,education,workplace,active,short_resume,comission_percent,photo_url, tmpProfessionId")] Consultant consultant)
+        public async Task<ActionResult> Edit([Bind(Include = "ConsultantId,ProfessionId,SpecialtyId,specialization,UserId,education,workplace,active,short_resume,comission_percent,photo_url, admin_comments, tmpProfessionId")] Consultant consultant)
         {
             if (ModelState.IsValid && consultant.ProfessionId == (int?)TempData["tmpProfessionId"])
             {

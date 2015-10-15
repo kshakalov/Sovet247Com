@@ -1,16 +1,25 @@
 ﻿@model Sovet247Admin.Models.Transaction
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Детали транзакции";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Детали транзакции</h2>
 
 <div>
-    <h4>Transaction</h4>
-    <hr />
+        <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserId) 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.firstname) @Html.DisplayFor(model => model.User.lastname)
+        </dd>
+
+
         <dt>
             @Html.DisplayNameFor(model => model.amount)
         </dt>
@@ -36,24 +45,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Consultation.subject)
+            @Html.DisplayNameFor(model => model.ConsultationId)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Consultation.subject)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.User.nickname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.nickname)
-        </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.TransactionId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Редактировать", "Edit", new { id = Model.TransactionId }) |
+    @Html.ActionLink("Вернуться к списку", "Index")
 </p>

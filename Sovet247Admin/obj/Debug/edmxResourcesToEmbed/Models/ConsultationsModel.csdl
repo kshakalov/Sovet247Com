@@ -34,6 +34,7 @@
     <NavigationProperty Name="Consultations" Relationship="Self.FK_Consultations_Consultants" FromRole="Consultants" ToRole="Consultations" />
     <NavigationProperty Name="Profession" Relationship="ConsultationsModel.FK_Consultants_Professions" FromRole="Consultant" ToRole="Profession" />
     <NavigationProperty Name="Specialty" Relationship="ConsultationsModel.FK_Consultants_Specialties" FromRole="Consultant" ToRole="Specialty" />
+    <Property Name="admin_comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Consultation_Statuses">
     <Key>

@@ -33,6 +33,7 @@
           <Property Name="short_resume" Type="nvarchar" MaxLength="2000" />
           <Property Name="comission_percent" Type="numeric" Precision="18" Scale="2" />
           <Property Name="photo_url" Type="nvarchar" MaxLength="512" />
+          <Property Name="admin_comments" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Consultation_Statuses">
           <Key>
@@ -556,6 +557,7 @@
           <NavigationProperty Name="Consultations" Relationship="Self.FK_Consultations_Consultants" FromRole="Consultants" ToRole="Consultations" />
           <NavigationProperty Name="Profession" Relationship="ConsultationsModel.FK_Consultants_Professions" FromRole="Consultant" ToRole="Profession" />
           <NavigationProperty Name="Specialty" Relationship="ConsultationsModel.FK_Consultants_Specialties" FromRole="Consultant" ToRole="Specialty" />
+          <Property Name="admin_comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Consultation_Statuses">
           <Key>
@@ -1095,6 +1097,7 @@
           <EntitySetMapping Name="Consultants">
             <EntityTypeMapping TypeName="ConsultationsModel.Consultant">
               <MappingFragment StoreEntitySet="Consultants">
+                <ScalarProperty Name="admin_comments" ColumnName="admin_comments" />
                 <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
                 <ScalarProperty Name="ProfessionId" ColumnName="ProfessionId" />
                 <ScalarProperty Name="SpecialtyId" ColumnName="SpecialtyId" />

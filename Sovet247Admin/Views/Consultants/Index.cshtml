@@ -131,6 +131,7 @@
             @Html.ActionLink("Детали", "Details", new { id=item.ConsultantId }) <br />
             @Html.ActionLink("Удалить", "Delete", new {id = item.ConsultantId})<br/>
             @Html.ActionLink("Написать", "Create", "AdminMessages",new { id = item.ConsultantId }, null)
+            @Html.ActionLink("Новая финансовая операция", "Create", "Transactions", new { UserId = item.UserId }, null)
         </td>
     </tr>
 }

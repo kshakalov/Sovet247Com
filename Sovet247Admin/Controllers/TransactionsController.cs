@@ -93,10 +93,20 @@ namespace Sovet247Admin.Controllers
         }
 
         // GET: Transactions/Create
-        public ActionResult Create()
+        public ActionResult Create(int? UserId)
         {
             ViewBag.ConsultationId = new SelectList(_db.Consultations, "ConsultationId", "subject");
-            ViewBag.UserId = new SelectList(_db.Users, "UserId", "nickname");
+            var users =
+                _db.Users.OrderBy(u => u.lastname)
+                    .Select(s => new SelectListItem {Text = s.firstname + " " + s.lastname, Value = s.UserId.ToString()});
+            if (UserId != null)
+            {
+                ViewBag.UserId = new SelectList(users, "Value", "Text", UserId);
+            }
+            else
+            {
+                ViewBag.UserId = new SelectList(users, "Value", "Text");
+            }
             return View();
         }
 
@@ -131,8 +141,11 @@ namespace Sovet247Admin.Controllers
             {
                 return HttpNotFound();
             }
+
             ViewBag.ConsultationId = new SelectList(_db.Consultations, "ConsultationId", "subject", transaction.ConsultationId);
-            ViewBag.UserId = new SelectList(_db.Users, "UserId", "nickname", transaction.UserId);
+
+            var users = _db.Users.OrderBy(u=>u.lastname).Select(s => new SelectListItem {Text = s.firstname + " " + s.lastname, Value = s.UserId.ToString()});
+            ViewBag.UserId = new SelectList(users, "Value", "Text", transaction.UserId);
             return View(transaction);
         }
 
