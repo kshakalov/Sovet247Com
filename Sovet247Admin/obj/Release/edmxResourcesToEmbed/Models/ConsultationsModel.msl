@@ -18,6 +18,7 @@
     <EntitySetMapping Name="Consultants">
       <EntityTypeMapping TypeName="ConsultationsModel.Consultant">
         <MappingFragment StoreEntitySet="Consultants">
+          <ScalarProperty Name="admin_comments" ColumnName="admin_comments" />
           <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
           <ScalarProperty Name="ProfessionId" ColumnName="ProfessionId" />
           <ScalarProperty Name="SpecialtyId" ColumnName="SpecialtyId" />

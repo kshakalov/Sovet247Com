@@ -79,6 +79,12 @@
         <th>
             @Html.DisplayNameFor(model => model.comission_percent)
         </th>
+        <th>
+            <span>Баланс</span>
+        </th>
+        <th>
+            <span>Рейтинг эксперта</span>
+        </th>
         <th></th>
     </tr>
 
@@ -107,10 +113,25 @@
             @Html.DisplayFor(modelItem => item.comission_percent)
         </td>
         <td>
+            @{
+                var balance = item.User.Transactions.Sum(t => t.amount);
+            }
+            @Html.ActionLink("$"+balance,"Index","Transactions", new{UserId=item.UserId}, null)
+            
+        </td>
+        <td>
+            @{
+                var rating = item.Consultations.Average(t=>t.customer_rating);
+            }
+            @Html.DisplayFor(modelItem => rating)
+        </td>
+
+        <td>
             @Html.ActionLink("Изменить", "Edit", new { id=item.ConsultantId }) <br />
             @Html.ActionLink("Детали", "Details", new { id=item.ConsultantId }) <br />
             @Html.ActionLink("Удалить", "Delete", new {id = item.ConsultantId})<br/>
             @Html.ActionLink("Написать", "Create", "AdminMessages",new { id = item.ConsultantId }, null)
+            @Html.ActionLink("Новая финансовая операция", "Create", "Transactions", new { UserId = item.UserId }, null)
         </td>
     </tr>
 }

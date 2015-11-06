@@ -116,7 +116,7 @@
             @{
                 var balance = item.User.Transactions.Sum(t => t.amount);
             }
-            @Html.ActionLink("$"+balance,"Index","Transactions",null, new{userId=item.UserId})
+            @Html.ActionLink("$"+balance,"Index","Transactions", new{UserId=item.UserId}, null)
             
         </td>
         <td>

@@ -28,6 +28,7 @@
     <Property Name="short_resume" Type="nvarchar" MaxLength="2000" />
     <Property Name="comission_percent" Type="numeric" Precision="18" Scale="2" />
     <Property Name="photo_url" Type="nvarchar" MaxLength="512" />
+    <Property Name="admin_comments" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Consultation_Statuses">
     <Key>
