@@ -79,6 +79,8 @@
           <Property Name="customer_comments" Type="nvarchar" MaxLength="4000" />
           <Property Name="consultation_price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
           <Property Name="admin_comments" Type="nvarchar" MaxLength="4000" />
+          <Property Name="urgency" Type="smallint" Nullable="false" />
+          <Property Name="detalization" Type="smallint" Nullable="false" />
         </EntityType>
         <EntityType Name="Countries">
           <Key>
@@ -135,16 +137,6 @@
           <Property Name="ProfessionId" Type="int" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="Transactions">
           <Key>
             <PropertyRef Name="TransactionId" />
@@ -155,6 +147,7 @@
           <Property Name="transactionDate" Type="datetime" Nullable="false" />
           <Property Name="description" Type="nvarchar" MaxLength="4000" />
           <Property Name="ConsultationId" Type="int" />
+          <Property Name="isApproved" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -435,7 +428,6 @@
           <EntitySet Name="Professions" EntityType="Self.Professions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Specialties" EntityType="Self.Specialties" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_AdminMessages_Users" Association="Self.FK_AdminMessages_Users">
@@ -615,6 +607,8 @@
           <NavigationProperty Name="Transactions" Relationship="Self.FK_Transactions_Consultations" FromRole="Consultations" ToRole="Transactions" />
           <NavigationProperty Name="User" Relationship="ConsultationsModel.ConsultationUser" FromRole="Consultation" ToRole="User" />
           <Property Name="admin_comments" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="urgency" Type="Int16" Nullable="false" />
+          <Property Name="detalization" Type="Int16" Nullable="false" />
         </EntityType>
         <EntityType Name="Country">
           <Key>
@@ -705,6 +699,7 @@
           <Property Name="ConsultationId" Type="Int32" />
           <NavigationProperty Name="Consultation" Relationship="Self.FK_Transactions_Consultations" FromRole="Transactions" ToRole="Consultations" />
           <NavigationProperty Name="User" Relationship="Self.FK_Transactions_Users" FromRole="Transactions" ToRole="Users" />
+          <Property Name="isApproved" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1144,6 +1139,8 @@
           <EntitySetMapping Name="Consultations">
             <EntityTypeMapping TypeName="ConsultationsModel.Consultation">
               <MappingFragment StoreEntitySet="Consultations">
+                <ScalarProperty Name="detalization" ColumnName="detalization" />
+                <ScalarProperty Name="urgency" ColumnName="urgency" />
                 <ScalarProperty Name="admin_comments" ColumnName="admin_comments" />
                 <ScalarProperty Name="ConsultationId" ColumnName="ConsultationId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
@@ -1222,20 +1219,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="ConsultationsModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Transactions">
             <EntityTypeMapping TypeName="ConsultationsModel.Transaction">
               <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="isApproved" ColumnName="isApproved" />
                 <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="amount" ColumnName="amount" />

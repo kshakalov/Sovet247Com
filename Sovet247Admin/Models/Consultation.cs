@@ -50,7 +50,10 @@ namespace Sovet247Admin.Models
         public decimal consultation_price { get; set; }
         [DisplayName("Комментарий администратора")]
         public string admin_comments { get; set; }
-
+        [DisplayName("Срочность")]
+        public short urgency { get; set; }
+        [DisplayName("Детализация")]
+        public short detalization { get; set; }
 
         public virtual Consultant Consultant { get; set; }
         public virtual Consultation_Statuses Consultation_Statuses { get; set; }

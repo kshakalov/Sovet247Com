@@ -27,7 +27,9 @@ namespace Sovet247Admin.Models
         public string description { get; set; }
         [DisplayName("Консультация")]
         public Nullable<int> ConsultationId { get; set; }
-    
+        [DisplayName("Подтверждена администратором")]
+        public bool isApproved { get; set; }
+
         public virtual Consultation Consultation { get; set; }
         public virtual User User { get; set; }
     }
