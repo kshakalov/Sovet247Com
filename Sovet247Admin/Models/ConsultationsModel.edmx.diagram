@@ -17,7 +17,6 @@
         <EntityTypeShape EntityType="ConsultationsModel.Profession" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsultationsModel.Role" Width="1.5" PointX="1.5" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsultationsModel.Specialty" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="ConsultationsModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsultationsModel.Transaction" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="ConsultationsModel.User" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
         <AssociationConnector Association="ConsultationsModel.FK_Consultants_Users" ManuallyRouted="false" />

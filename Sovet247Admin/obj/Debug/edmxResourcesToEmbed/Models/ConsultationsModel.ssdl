@@ -74,6 +74,8 @@
     <Property Name="customer_comments" Type="nvarchar" MaxLength="4000" />
     <Property Name="consultation_price" Type="numeric" Precision="18" Scale="2" Nullable="false" />
     <Property Name="admin_comments" Type="nvarchar" MaxLength="4000" />
+    <Property Name="urgency" Type="smallint" Nullable="false" />
+    <Property Name="detalization" Type="smallint" Nullable="false" />
   </EntityType>
   <EntityType Name="Countries">
     <Key>
@@ -130,16 +132,6 @@
     <Property Name="ProfessionId" Type="int" Nullable="false" />
     <Property Name="active" Type="bit" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
-  </EntityType>
   <EntityType Name="Transactions">
     <Key>
       <PropertyRef Name="TransactionId" />
@@ -150,6 +142,7 @@
     <Property Name="transactionDate" Type="datetime" Nullable="false" />
     <Property Name="description" Type="nvarchar" MaxLength="4000" />
     <Property Name="ConsultationId" Type="int" />
+    <Property Name="isApproved" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -430,7 +423,6 @@
     <EntitySet Name="Professions" EntityType="Self.Professions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Specialties" EntityType="Self.Specialties" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_AdminMessages_Users" Association="Self.FK_AdminMessages_Users">

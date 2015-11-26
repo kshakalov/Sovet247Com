@@ -677,16 +677,6 @@
           <NavigationProperty Name="Profession" Relationship="Self.FK_Specialties_Professions" FromRole="Specialties" ToRole="Professions" />
           <NavigationProperty Name="Consultants" Relationship="ConsultationsModel.FK_Consultants_Specialties" FromRole="Specialty" ToRole="Consultant" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="Transaction">
           <Key>
             <PropertyRef Name="TransactionId" />
@@ -925,7 +915,6 @@
           <EntitySet Name="Professions" EntityType="Self.Profession" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="Specialties" EntityType="Self.Specialty" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="Transactions" EntityType="Self.Transaction" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <AssociationSet Name="FK_Consultants_Users" Association="Self.FK_Consultants_Users">
