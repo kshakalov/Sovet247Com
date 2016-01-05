@@ -19,7 +19,7 @@ namespace Sovet247Admin.Controllers
 
         // GET: Transactions
         public ViewResult Index(int? page, int? userId, int? transactionTypeSearch, string userNameSearch, 
-            DateTime? fromDateSearch, DateTime? toDateSearch)
+            DateTime? fromDateSearch, DateTime? toDateSearch, bool? isApproved)
         {
             if (page == null)
                 page = 1;
@@ -64,6 +64,12 @@ namespace Sovet247Admin.Controllers
                 ViewBag.toDateSearch = toDateSearch;
             }
 
+            if (isApproved != null)
+            {
+                transactions = transactions.Where(t => t.isApproved == isApproved);
+                ViewBag.isApproved = isApproved;
+            }
+
             ViewBag.transactionTypeSearch =
                 new SelectList(new[]
                 {
@@ -90,6 +96,23 @@ namespace Sovet247Admin.Controllers
                 return HttpNotFound();
             }
             return View(transaction);
+        }
+
+
+        public async Task<ActionResult> Approve(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Transaction transaction = await _db.Transactions.FindAsync(id);
+            if (transaction == null)
+            {
+                return HttpNotFound();
+            }
+            transaction.isApproved = true;
+            await _db.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         // GET: Transactions/Create

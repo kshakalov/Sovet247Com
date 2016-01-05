@@ -54,6 +54,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.FirstOrDefault().ConsultationId)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model=>model.FirstOrDefault().isApproved)
+                </th>
 
                 <th></th>
             </tr>
@@ -79,10 +82,14 @@
                         @Html.DisplayFor(modelItem => item.Consultation.subject)
                     </td>
 
+                    <td style="text-align: center;">
+                        @Html.CheckBoxFor(modelItem=>item.isApproved, new {@disabled=true})
+                    </td>
                     <td>
-                        @Html.ActionLink("Изменить", "Edit", new {id = item.TransactionId}) |
-                        @Html.ActionLink("Подробнее", "Details", new {id = item.TransactionId}) |
+                        @Html.ActionLink("Изменить", "Edit", new {id = item.TransactionId})
+                        @Html.ActionLink("Подробнее", "Details", new {id = item.TransactionId})
                         @Html.ActionLink("Удалить", "Delete", new {id = item.TransactionId})
+                        @Html.ActionLink("Утвердить", "Approve", new {id=item.TransactionId})
                     </td>
                 </tr>
 }
